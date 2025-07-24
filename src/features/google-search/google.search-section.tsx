@@ -24,7 +24,10 @@ export function GoogleSearchSection() {
 
                 </form>
             </div>
-            <button className={"h-[44px] w-[116px] bg-blue-600 rounded-xl text-white"}>جستجو کن</button>
+            <button className={"h-[44px] w-[116px] bg-blue-600 rounded-xl text-white"} onClick={(e) => {
+                e.preventDefault();
+                window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchText)}`
+            }}>جستجو کن</button>
         </div>
 
       // </div>
