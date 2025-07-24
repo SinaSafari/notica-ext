@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "نوتیکا",
+  "version": "1.0.0",
+  "description": "نوتیکا",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "نوتیکا"
+  }
+}
