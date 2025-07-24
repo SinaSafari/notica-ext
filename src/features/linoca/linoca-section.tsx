@@ -19,13 +19,7 @@ export function LinocaSection() {
         <IconCategory size={30} color="blue" />
         <p className="text-xs">لینوکا</p>
       </GlassContainer>
-      {Array.from({ length: 6 })
-        .fill(1)
-        .map((_, index) => (
-          <GlassContainer className="flex justify-center items-center w-24 h-24">
-            <div>12</div>
-          </GlassContainer>
-        ))}
+
     </div>
   );
 }

@@ -30,7 +30,7 @@ export function MainPage() {
       selectedBg: state.selectedBg
     }
   }))
-
+  console.log("selectedBg", selectedBg)
 
   return (
       <>
