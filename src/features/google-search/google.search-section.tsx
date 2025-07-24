@@ -1,6 +1,10 @@
 "use client";
 
+import {useState} from "react";
+
 export function GoogleSearchSection() {
+
+    const [searchText, setSeatchText] = useState("")
 
   return (
     // <div className="h-full w-full flex items-stretch justify-between">
@@ -11,10 +15,12 @@ export function GoogleSearchSection() {
             <div className={"flex-1"}>
                 <form onSubmit={(e) => {
                     e.preventDefault();
-                    window.location.href = `https://www.google.com/search?q=${encodeURIComponent("hello world")}`
+                    window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchText)}`
 
                 }}>
-                    <input className={"border-0 outline-0 focus:outline-none w-full"} placeholder={"در گوگل جستجو کن"} />
+                    <input className={"border-0 outline-0 focus:outline-none w-full"} placeholder={"در گوگل جستجو کن"} onChange={(e) => {
+                        setSeatchText(e.target.value)
+                    }} value={searchText}/>
 
                 </form>
             </div>

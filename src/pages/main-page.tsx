@@ -40,7 +40,7 @@ export function MainPage() {
       <Modal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
         <LoginModal onClose={() => setIsLoginModalOpen(false)} />
       </Modal>
-    <div className={`h-screen w-screen grid place-items-center bg-[url(${selectedBg})] bg-cover bg-center`}>
+    <div className={`h-screen w-screen grid place-items-center bg-[url(/bgs/2.jpg)] bg-cover bg-center`}>
       <div className="w-10/12 h-10/12 max-h-[852px]  flex flex-col justify-between items-stretch gap-4">
         {/* profile start */}
         <div className="flex w-full justify-between items-center h-20  ">
