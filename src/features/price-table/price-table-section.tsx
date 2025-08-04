@@ -14,7 +14,7 @@ export function PriceTableSection() {
     queryKey: ["prices"],
     queryFn: async () => {
       const res = await fetch(
-        "http://cloud.rhinolabs.ir/api/ext/price/v1/list"
+        "https://notica.rhinolabs.ir/api/ext/price/v1/list"
       );
       const result = await res.json();
       return result;
@@ -132,7 +132,9 @@ function PriceItem(props: PriceItemProps) {
       </div>
       <div className={"flex-1 flex items-center justify-end"}>
         <p>
-          <span>{Number(props.price).toLocaleString("fa-IR")}</span>
+          <span className="text-sm mx-2">
+            {Number(props.price).toLocaleString("fa-IR")}
+          </span>
           <span className={"font-thin text-xs"}> تومان </span>
         </p>
       </div>
