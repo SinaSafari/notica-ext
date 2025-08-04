@@ -6,9 +6,18 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "identity"],
   "action": {
     "default_popup": "index.html",
     "default_title": "نوتیکا"
+  },
+  "host_permissions": ["https://www.googleapis.com/calendar/v3/*"],
+  "oauth2": {
+    "client_id": "802502124913-lmcbd36kefahsfmqjhk64e29b4mn0bfc.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/calendar"]
+  },
+
+  "background": {
+    "service_worker": "background.js"
   }
 }

@@ -6,11 +6,15 @@ type GlassContainerProps = {
   onClick?: () => void;
 };
 
-export function GlassContainer({ children, className, onClick }: GlassContainerProps) {
+export function GlassContainer({
+  children,
+  className,
+  onClick,
+}: GlassContainerProps) {
   return (
     <div
       className={twMerge(
-        "rounded-2xl bg-white/50 shadow-lg border border-slate-300 backdrop-blur-sm p-4",
+        "rounded-2xl bg-white/50   border-slate-300 backdrop-blur-sm p-4",
         className
       )}
       onClick={() => {
