@@ -16,34 +16,6 @@ function formatDate(date: Date) {
   });
 }
 
-const MOCK_DATA = [
-  {
-    id: 1,
-    title: "کار 1",
-    description: "لورم ایپسوم متن ساختگی با تولید سادگی نا مفهوم از صنعت.",
-    status: "undone",
-    tag: "red-500",
-    createdAt: new Date(),
-  },
-  {
-    id: 2,
-    title: "کار 2",
-    description: "لورم ایپسوم متن ساختگی با تولید سادگی نا مفهوم از صنعت.",
-    status: "undone",
-    tag: "green-500",
-    createdAt: new Date(),
-  },
-  {
-    id: 3,
-    title: "کار 3",
-    description: "لورم ایپسوم متن ساختگی با تولید سادگی نا مفهوم از صنعت.",
-
-    status: "done",
-    tag: "yellow-500",
-    createdAt: new Date(),
-  },
-];
-
 export function TodoListSection() {
   const { todos, createTodo, updateTodo } = useAppState(
     useShallow((state) => {
@@ -56,6 +28,9 @@ export function TodoListSection() {
   );
   const [isCreateTodoModalOpen, setIsCreateTodoModalOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
+
+  console.log({ todos });
+
   return (
     <>
       <Modal
@@ -87,20 +62,32 @@ export function TodoListSection() {
               >
                 <div className="h-full w-4 flex flex-col justify-around items-center gap-4">
                   <input type="checkbox" className="w-4 h-4" />
-                  {/*{todo.tag !== null || todo.tag !== "" ? (*/}
-                  {/*  <div*/}
-                  {/*    className={`h-3 w-3 bg-${todo.tag} rounded-xl text-center`}*/}
-                  {/*  ></div>*/}
-                  {/*) : null}*/}
+                  {todo.tag !== null || todo.tag !== "" ? (
+                    <div
+                      className={`h-3 w-3 ${
+                        todo.tag === "urgent"
+                          ? "bg-red-500"
+                          : todo.tag === "moderate"
+                          ? "bg-yellow-500"
+                          : todo.tag === "not-force"
+                          ? "bg-green-500"
+                          : "bg-transparent"
+                      } rounded-xl text-center`}
+                    ></div>
+                  ) : null}
                 </div>
                 <div className="grow flex flex-col justify-between items-stretch gap-2">
                   <div className="flex justify-between items-center">
-                    <p className="text-lg font-bold">{todo.title}</p>
+                    <p className="text-sm font-bold">{todo.title}</p>
 
                     <div className="flex justify-end items-center gap-2">
                       <IconCalendar size={16} color="gray" />
                       <p className="text-xs text-gray-500">
-                        {formatDate(todo.createdAt)}
+                        {todo.createdAt ? (
+                          <>{formatDate(new Date(todo.createdAt))}</>
+                        ) : (
+                          <></>
+                        )}
                       </p>
                     </div>
                   </div>

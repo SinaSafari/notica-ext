@@ -2,10 +2,12 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type TodoStatus = "done" | "pending";
+export type TagType = "moderate" | "urgent" | "not-force";
 type TodoItem = {
   id: string;
   title: string;
   description: string;
+  tag: TagType;
   dueDate: Date;
   createdAt: Date;
   status: TodoStatus;
@@ -27,6 +29,7 @@ interface AppState {
   createTodo: (
     title: string,
     description: string,
+    tag: TagType,
     dueDate: Date,
     status: TodoStatus,
     createdAt: Date
@@ -35,6 +38,7 @@ interface AppState {
     id: string,
     title: string,
     description: string,
+    tag: TagType,
     dueDate: Date,
     status: TodoStatus
   ) => void;
@@ -42,6 +46,7 @@ interface AppState {
   // bookmarks
   bookmarks: Array<BookMark>;
   addBookMark: (input: BookMark) => void;
+  removeBookmark: (id: string) => void;
 }
 
 export const useAppState = create<AppState>()(
@@ -60,6 +65,7 @@ export const useAppState = create<AppState>()(
       createTodo: (
         title: string,
         description: string,
+        tag: TagType,
         dueDate: Date,
         status: TodoStatus,
         createdAt: Date
@@ -71,6 +77,7 @@ export const useAppState = create<AppState>()(
               id: crypto.randomUUID(),
               title,
               description,
+              tag,
               dueDate,
               status,
               createdAt,
@@ -82,6 +89,7 @@ export const useAppState = create<AppState>()(
         id: string,
         title: string,
         description: string,
+        tag: TagType,
         dueDate: Date,
         status: TodoStatus
       ) => {
@@ -95,6 +103,7 @@ export const useAppState = create<AppState>()(
               id: id,
               title,
               description,
+              tag,
               dueDate,
               status,
               createdAt: todo!.createdAt,
@@ -107,6 +116,10 @@ export const useAppState = create<AppState>()(
       bookmarks: [],
       addBookMark: (input) => {
         set({ bookmarks: [...get().bookmarks, input] });
+      },
+      removeBookmark: (id) => {
+        const bookmarks = get().bookmarks;
+        set({ bookmarks: bookmarks.filter((i) => i.id !== id) });
       },
     }),
     { name: "app-store" }

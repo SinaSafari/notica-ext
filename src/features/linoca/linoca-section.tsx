@@ -1,6 +1,6 @@
 "use client";
 import { GlassContainer } from "@/components/glass-container";
-import { IconCategory, IconPlus } from "@tabler/icons-react";
+import { IconCategory, IconPlus, IconX } from "@tabler/icons-react";
 import { useAppState } from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
 import { useState } from "react";
@@ -8,12 +8,13 @@ import { Modal } from "@/components/modal";
 import { AddBookmarkModal } from "./add-bookmark-modal";
 
 export function LinocaSection() {
-  const { toggleLinocaShown, bookmarks } = useAppState(
+  const { toggleLinocaShown, bookmarks, removeBookmark } = useAppState(
     useShallow((state) => {
       return {
         linocaShown: state.linocaShown,
         toggleLinocaShown: state.toggleLinocaShown,
         bookmarks: state.bookmarks,
+        removeBookmark: state.removeBookmark,
       };
     })
   );
@@ -56,11 +57,20 @@ export function LinocaSection() {
               .map((i) => {
                 return (
                   <GlassContainer
-                    className="flex flex-col justify-center items-center w-24 h-24 bg-white gap-2"
+                    className="flex flex-col justify-center items-center w-24 h-24 bg-white gap-2 relative"
                     onClick={() => {
                       window.location.href = i.link;
                     }}
                   >
+                    <div
+                      className="absolute top-0 left-0 w-5 h-5 bg-gray-200 rounded-full m-1 flex items-center justify-center cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeBookmark(i.id);
+                      }}
+                    >
+                      <IconX color="white" />
+                    </div>
                     <img className="w-8 h-8" src={i.favicon} />
                     <p className="text-xs">{i.title}</p>
                   </GlassContainer>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppState } from "@/store.ts";
+import { useAppState, type TagType } from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
 import { useState } from "react";
 
@@ -12,6 +12,8 @@ type CreateTodoModalProps = {
 export function CreateTodoModal(props: CreateTodoModalProps) {
   const [taskTitle, setTaskTitle] = useState(props.defaultTitle);
   const [taskDescription, setTaskDescription] = useState("");
+  const [selectedTag, setSelectedTag] = useState<TagType>("moderate");
+
   const { createTodo, updateTodo } = useAppState(
     useShallow((state) => {
       return {
@@ -44,7 +46,7 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
                 className={
                   "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
                 }
-                placeholder={"عنوان تسک شما شما"}
+                placeholder={"عنوان تسک شما"}
                 value={taskTitle}
                 onChange={(e) => setTaskTitle(e.target.value)}
               />
@@ -64,6 +66,48 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
                 onChange={(e) => setTaskDescription(e.target.value)}
               />
             </div>
+
+            <div className="flex items-stretch gap-4 my-4">
+              <div
+                onClick={() => setSelectedTag("urgent")}
+                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
+                  selectedTag === "urgent"
+                    ? "border-blue-500"
+                    : "border-gray-300"
+                }`}
+              >
+                <div className="rounded-full bg-red-500 h-4 w-4"></div>
+                <div className="flex-1">
+                  <p className="text-sm">فوری</p>
+                </div>
+              </div>
+              <div
+                onClick={() => setSelectedTag("moderate")}
+                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
+                  selectedTag === "moderate"
+                    ? "border-blue-500"
+                    : "border-gray-300"
+                }`}
+              >
+                <div className="rounded-full bg-yellow-500 h-4 w-4"></div>
+                <div className="flex-1">
+                  <p className="text-sm">مهم</p>
+                </div>
+              </div>
+              <div
+                onClick={() => setSelectedTag("not-force")}
+                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
+                  selectedTag === "not-force"
+                    ? "border-blue-500"
+                    : "border-gray-300"
+                }`}
+              >
+                <div className="rounded-full bg-green-600 h-4 w-4"></div>
+                <div className="flex-1">
+                  <p className="text-sm">اگر شد</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className={"max-h-[52px] flex flex-row-reverse"}>
@@ -75,6 +119,7 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
                 createTodo(
                   taskTitle,
                   taskDescription,
+                  selectedTag,
                   new Date(),
                   "pending",
                   new Date()
