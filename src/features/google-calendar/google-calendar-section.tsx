@@ -15,6 +15,7 @@ export function GoogleCalendarSection() {
   const [calendarData, setCalendarData] = useState<CalendarData | null>(null);
   const [nextMonthCalendarData, setNextMonthCalendarData] =
     useState<CalendarData | null>(null);
+  console.log({ nextMonthCalendarData });
 
   const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
 

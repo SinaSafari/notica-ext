@@ -14,11 +14,10 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
   const [taskDescription, setTaskDescription] = useState("");
   const [selectedTag, setSelectedTag] = useState<TagType>("moderate");
 
-  const { createTodo, updateTodo } = useAppState(
+  const { createTodo } = useAppState(
     useShallow((state) => {
       return {
         createTodo: state.createTodo,
-        updateTodo: state.updateTodo,
       };
     })
   );

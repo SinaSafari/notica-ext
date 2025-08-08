@@ -2,7 +2,7 @@ import { GlassContainer } from "@/components/glass-container";
 import { useQuery } from "@tanstack/react-query";
 
 export function DailyNotice() {
-  const { isLoading, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ["daily"],
     queryFn: async () => {
       const response = await fetch(

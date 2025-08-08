@@ -10,7 +10,7 @@ type PriceItemProps = {
 };
 
 export function PriceTableSection() {
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["prices"],
     queryFn: async () => {
       const res = await fetch(
@@ -20,24 +20,24 @@ export function PriceTableSection() {
       return result;
     },
     select: (data) => {
-      const gold18k = data.gold.find((item) => {
+      const gold18k = data.gold.find((item: { symbol: string }) => {
         return item.symbol === "IR_GOLD_18K";
       });
-      const coin = data.gold.find((item) => {
+      const coin = data.gold.find((item: { symbol: string }) => {
         return item.symbol === "IR_COIN_EMAMI";
       });
 
-      const dollar = data.currency.find((item) => {
+      const dollar = data.currency.find((item: { symbol: string }) => {
         return item.symbol === "USD";
       });
-      const euro = data.currency.find((item) => {
+      const euro = data.currency.find((item: { symbol: string }) => {
         return item.symbol === "EUR";
       });
 
-      const bitcoin = data.cryptocurrency.find((item) => {
+      const bitcoin = data.cryptocurrency.find((item: { symbol: string }) => {
         return item.symbol === "BTC";
       });
-      const etherium = data.cryptocurrency.find((item) => {
+      const etherium = data.cryptocurrency.find((item: { symbol: string }) => {
         return item.symbol === "ETH";
       });
 

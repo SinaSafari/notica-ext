@@ -61,8 +61,20 @@ export function MainPage() {
             <div className="flex items-center justify-end gap-4">
               <div
                 className="w-12 h-12  bg-white shadow-lg ring-1 ring-black/20  border border-slate-300 backdrop-blur-sm rounded-lg grid place-items-center"
-                onClick={() => {
+                onClick={async () => {
                   setIsLoginModalOpen(true);
+                  // const res = await fetch(
+                  //   "http://localhost:3000/api/ext/auth",
+                  //   {
+                  //     method: "POST",
+                  //     body: JSON.stringify({
+                  //       email: "member@company.com",
+                  //       password: "password",
+                  //     }),
+                  //   }
+                  // );
+                  // const data = await res.json();
+                  // console.log({ data });
                 }}
               >
                 <IconUser />
@@ -135,3 +147,55 @@ export function MainPage() {
     </>
   );
 }
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * {
+    "data": {
+        "user": {
+            "id": "76d563b7-cf65-4759-9c79-34813929c334",
+            "name": "member user",
+            "email": "member@company.com",
+            "emailVerified": true,
+            "image": null,
+            "role": "user",
+            "createdAt": "2025-08-08T07:37:24.080Z",
+            "updatedAt": "2025-08-08T07:37:24.080Z",
+            "members": [
+                {
+                    "id": "440f93b8-1a63-4aff-8fca-eed5dcc980f6",
+                    "organizationId": "XmvCHoRf6JePQCMPrtXwjdH1KosZoLrR",
+                    "userId": "76d563b7-cf65-4759-9c79-34813929c334",
+                    "role": "member",
+                    "createdAt": "2025-08-08T07:37:24.163Z",
+                    "organization": {
+                        "id": "XmvCHoRf6JePQCMPrtXwjdH1KosZoLrR",
+                        "name": "asdad",
+                        "slug": "asdad",
+                        "logo": null,
+                        "createdAt": "2025-08-07T11:51:17.389Z",
+                        "metadata": null
+                    }
+                }
+            ]
+        },
+        "auth": {
+            "redirect": false,
+            "token": "3MFETHvXMgN5l3Hlj0vDekWSqTGIE4Rj",
+            "user": {
+                "id": "76d563b7-cf65-4759-9c79-34813929c334",
+                "email": "member@company.com",
+                "name": "member user",
+                "image": null,
+                "emailVerified": true,
+                "createdAt": "2025-08-08T07:37:24.080Z",
+                "updatedAt": "2025-08-08T07:37:24.080Z"
+            }
+        }
+    }
+}
+ */

@@ -17,12 +17,10 @@ function formatDate(date: Date) {
 }
 
 export function TodoListSection() {
-  const { todos, createTodo, updateTodo } = useAppState(
+  const { todos } = useAppState(
     useShallow((state) => {
       return {
         todos: state.todos,
-        createTodo: state.createTodo,
-        updateTodo: state.updateTodo,
       };
     })
   );
