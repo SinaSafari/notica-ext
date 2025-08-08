@@ -6,6 +6,16 @@ import { ErrorBoundaryProvider } from "./providers/error-boundary-provider.tsx";
 import { QueryProvider } from "./providers/query-provider.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-Black.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-Bold.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-ExtraBold.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-ExtraLight.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-Light.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-Medium.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-Regular.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-SemiBold.woff2";
+import "./assets/fonts/peyda/woff2/PeydaWebFaNum-Thin.woff2";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ErrorBoundaryProvider>

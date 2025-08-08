@@ -71,7 +71,7 @@ export function LinocaSection() {
                     >
                       <IconX color="white" />
                     </div>
-                    <img className="w-8 h-8" src={i.favicon} />
+                    <img className="w-8 h-8" src={"./broken-link.png"} />
                     <p className="text-xs">{i.title}</p>
                   </GlassContainer>
                 );

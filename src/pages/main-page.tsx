@@ -11,7 +11,12 @@ import { GoogleSearchSection } from "@/features/google-search/google.search-sect
 import { LinocaSection } from "@/features/linoca/linoca-section";
 import { PriceTableSection } from "@/features/price-table/price-table-section";
 import { TodoListSection } from "@/features/tolo-list/todo-list-section";
-import { IconLogout, IconSettings, IconUser } from "@tabler/icons-react";
+import {
+  IconBrandGoogle,
+  IconLogout,
+  IconSettings,
+  IconUser,
+} from "@tabler/icons-react";
 import { useState } from "react";
 import { Modal } from "@/components/modal.tsx";
 import { LoginModal } from "@/features/auth/login-modal.tsx";
@@ -78,6 +83,26 @@ export function MainPage() {
                 }}
               >
                 <IconUser />
+              </div>
+
+              <div
+                className="w-12 h-12  bg-white shadow-lg ring-1 ring-black/20  border border-slate-300 backdrop-blur-sm rounded-lg grid place-items-center"
+                onClick={async () => {
+                  // @ts-ignore
+                  chrome.identity.getAuthToken(
+                    { interactive: true },
+                    async (token: string) => {
+                      // @ts-ignore
+                      if (chrome.runtime.lastError || !token) {
+                        console.log("login failed");
+                      } else {
+                        console.log("google auth successful:", token);
+                      }
+                    }
+                  );
+                }}
+              >
+                <IconBrandGoogle />
               </div>
 
               <div
@@ -151,51 +176,53 @@ export function MainPage() {
 /**
  * 
  * 
- * 
- * 
- * 
  * {
-    "data": {
-        "user": {
-            "id": "76d563b7-cf65-4759-9c79-34813929c334",
-            "name": "member user",
-            "email": "member@company.com",
-            "emailVerified": true,
-            "image": null,
-            "role": "user",
-            "createdAt": "2025-08-08T07:37:24.080Z",
-            "updatedAt": "2025-08-08T07:37:24.080Z",
-            "members": [
-                {
-                    "id": "440f93b8-1a63-4aff-8fca-eed5dcc980f6",
-                    "organizationId": "XmvCHoRf6JePQCMPrtXwjdH1KosZoLrR",
-                    "userId": "76d563b7-cf65-4759-9c79-34813929c334",
-                    "role": "member",
-                    "createdAt": "2025-08-08T07:37:24.163Z",
-                    "organization": {
-                        "id": "XmvCHoRf6JePQCMPrtXwjdH1KosZoLrR",
-                        "name": "asdad",
-                        "slug": "asdad",
-                        "logo": null,
-                        "createdAt": "2025-08-07T11:51:17.389Z",
-                        "metadata": null
-                    }
-                }
-            ]
-        },
-        "auth": {
-            "redirect": false,
-            "token": "3MFETHvXMgN5l3Hlj0vDekWSqTGIE4Rj",
-            "user": {
-                "id": "76d563b7-cf65-4759-9c79-34813929c334",
-                "email": "member@company.com",
-                "name": "member user",
-                "image": null,
-                "emailVerified": true,
-                "createdAt": "2025-08-08T07:37:24.080Z",
-                "updatedAt": "2025-08-08T07:37:24.080Z"
+    "user": {
+        "id": "76d563b7-cf65-4759-9c79-34813929c334",
+        "name": "member user",
+        "email": "member@company.com",
+        "emailVerified": true,
+        "image": null,
+        "role": "user",
+        "createdAt": "2025-08-08T07:37:24.080Z",
+        "updatedAt": "2025-08-08T07:37:24.080Z",
+        "accounts": [
+            {
+                "id": "6ff64142-4cf2-470f-8acb-d13e5731494b",
+                "accountId": "76d563b7-cf65-4759-9c79-34813929c334",
+                "providerId": "credential",
+                "userId": "76d563b7-cf65-4759-9c79-34813929c334",
+                "accessToken": null,
+                "refreshToken": null,
+                "idToken": null,
+                "accessTokenExpiresAt": null,
+                "refreshTokenExpiresAt": null,
+                "scope": null,
+                "password": "$argon2id$v=19$m=65536,t=3,p=4$72qswsYiuhVXDgzGcM4xxw$9zbwywIM0B1nhQt7j5ppsViAFmlRCFXSIh6nrRhqNwg",
+                "createdAt": "2025-08-08T07:37:24.149Z",
+                "updatedAt": "2025-08-08T07:37:24.149Z"
             }
-        }
+        ],
+        "members": [
+            {
+                "id": "440f93b8-1a63-4aff-8fca-eed5dcc980f6",
+                "organizationId": "XmvCHoRf6JePQCMPrtXwjdH1KosZoLrR",
+                "userId": "76d563b7-cf65-4759-9c79-34813929c334",
+                "role": "member",
+                "createdAt": "2025-08-08T07:37:24.163Z",
+                "organization": {
+                    "id": "XmvCHoRf6JePQCMPrtXwjdH1KosZoLrR",
+                    "name": "notica",
+                    "slug": "asdad",
+                    "logo": null,
+                    "createdAt": "2025-08-07T11:51:17.389Z",
+                    "metadata": null
+                }
+            }
+        ]
+    },
+    "auth": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3NmQ1NjNiNy1jZjY1LTQ3NTktOWM3OS0zNDgxMzkyOWMzMzQiLCJpYXQiOjE3NTQ2NTk1NTcsImV4cCI6MTc4NjE5NTU1N30.oU_7am5Dd1pDHM9gGEX2sJG_TTpQSrdhfx3q05K6zKU"
     }
 }
  */

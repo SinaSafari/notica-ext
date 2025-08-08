@@ -47,6 +47,17 @@ interface AppState {
   bookmarks: Array<BookMark>;
   addBookMark: (input: BookMark) => void;
   removeBookmark: (id: string) => void;
+
+  // login and auth
+  isAuthenticated: boolean;
+  organizationId: string;
+  accessToken: string;
+  login: (token: string, organizationId: string) => void;
+  logout: () => void;
+
+  // banners
+  banners: Array<{ image: string; position: string }>;
+  setBanners: (data: Array<{ image: string; position: string }>) => void;
 }
 
 export const useAppState = create<AppState>()(
@@ -121,7 +132,32 @@ export const useAppState = create<AppState>()(
         const bookmarks = get().bookmarks;
         set({ bookmarks: bookmarks.filter((i) => i.id !== id) });
       },
+
+      // login
+      isAuthenticated: false,
+      accessToken: "",
+      organizationId: "",
+      login: (token, organizationId) => {
+        set({ accessToken: token, organizationId: organizationId });
+      },
+      logout: () => {
+        set({ isAuthenticated: false, accessToken: "" });
+      },
+
+      banners: [
+        {
+          image: "/ads-1.png",
+          position: "1",
+        },
+        {
+          image: "/ads-1.png",
+          position: "2",
+        },
+      ],
+      setBanners: (data: Array<{ image: string; position: string }>) => {
+        set({ banners: [...data] });
+      },
     }),
-    { name: "app-store" }
+    { name: "app-stare" }
   )
 );

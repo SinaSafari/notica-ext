@@ -40,7 +40,7 @@ export function AddBookmarkModal(props: AddBookmarkModalProps) {
               className={
                 "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
               }
-              placeholder={"عنوان تسک شما شما"}
+              placeholder={"عنوان بوکمارک شما"}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -55,7 +55,7 @@ export function AddBookmarkModal(props: AddBookmarkModalProps) {
               className={
                 "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
               }
-              placeholder={"توضیحات تسک شما"}
+              placeholder={"لینک بوکمارک"}
               value={link}
               onChange={(e) => setLink(e.target.value)}
             />
