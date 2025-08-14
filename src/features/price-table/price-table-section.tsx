@@ -15,7 +15,7 @@ export function PriceTableSection() {
     queryFn: async () => {
       const res = await fetch(
         // "https://notica.rhinolabs.ir/api/ext/price/v1/list"
-        "http://localhost:3000/api/ext/price/v1/list"
+        "https://notica.app/api/ext/price/v1/list"
       );
       const result = await res.json();
       return result;

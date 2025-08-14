@@ -18,7 +18,8 @@ export function AdsSection() {
     queryKey: ["banners"],
     queryFn: async () => {
       const bannersRes = await fetch(
-        `http://localhost:3000/api/banners/${organizationId}`
+        // `http://localhost:3000/api/banners/${organizationId}`
+        `https://notica.app/api/banners/${organizationId}`
       );
       const banners = await bannersRes.json();
       return banners.map((i: { image: string; position: string }) => ({

@@ -34,10 +34,14 @@ export function LoginModal(props: LoginModal) {
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch("http://localhost:3000/api/ext/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await fetch(
+        // "http://localhost:3000/api/ext/auth/login"
+        "https://notica.app/api/ext/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const data = await res.json();
       login(
         data.auth.token as string,

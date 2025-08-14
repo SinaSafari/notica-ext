@@ -6,10 +6,17 @@ import {
 } from "./_hooks/use-custom-calendar.ts";
 import { useEffect, useState } from "react";
 import { Modal } from "@/components/modal.tsx";
+import { useAppState } from "@/store.ts";
+import { useShallow } from "zustand/shallow";
 
 const persianDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"]; // Sunday to Saturday
 
-export function GoogleCalendarSection() {
+type GoogleCalendarSectionProps = {
+  setIsNewEventModalOpen: (newState: boolean) => void;
+  isNewEventModalOpen: boolean;
+};
+
+export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
   const { generateCalendarData } = useCustomCalendar();
 
   const [calendarData, setCalendarData] = useState<CalendarData | null>(null);
@@ -27,66 +34,21 @@ export function GoogleCalendarSection() {
     setSelectedDate(calendarData.currentDate);
   }, []);
 
-  const [isNewEventModalOpen, setIsNewEventModalOpen] =
-    useState<boolean>(false);
+  // const [isNewEventModalOpen, setIsNewEventModalOpen] =
+  //   useState<boolean>(false);
+
+  const { googleToken } = useAppState(
+    useShallow((state) => {
+      return {
+        googleToken: state.googleToken,
+      };
+    })
+  );
+
+  console.log({ googleToken, isNewEventModalOpen: props.isNewEventModalOpen });
 
   return (
     <>
-      <Modal
-        isOpen={isNewEventModalOpen}
-        onClose={() => setIsNewEventModalOpen(false)}
-      >
-        <div
-          className={
-            "w-[768px] h-[440px] rounded-xl bg-slate-100 flex items-stretch justify-between p-4 gap-4"
-          }
-        >
-          <div
-            className={
-              "rounded-2xl bg-[#F8FAFC]  flex-1 ring-1 ring-slate-200 text-right flex flex-col justify-between items-stretch gap-4 p-2"
-            }
-          >
-            <div className={"flex-1 w-full h-full"}>
-              <p className={"text-xl"}>ایونت جدید</p>
-              <div className={"w-full flex-1"}>
-                <label htmlFor={"password"} className={"text-right text-xs"}>
-                  عنوان ایونت
-                </label>
-                <input
-                  type={"password"}
-                  name={"password"}
-                  className={
-                    "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                  }
-                  placeholder={"عنوان ایونت"}
-                />
-              </div>
-              <div className={"w-full flex-1"}>
-                <label htmlFor={"password"} className={"text-right text-xs"}>
-                  توضیحات
-                </label>
-                <input
-                  type={"password"}
-                  name={"password"}
-                  className={
-                    "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                  }
-                  placeholder={"توضیحات"}
-                />
-              </div>
-            </div>
-            <div className={"max-h-[52px] flex flex-row-reverse"}>
-              <button
-                className={"bg-blue-600 rounded-xl text-white px-10 py-2"}
-                onClick={() => setIsNewEventModalOpen(false)}
-              >
-                ذخیره
-              </button>
-            </div>
-          </div>
-        </div>
-      </Modal>
-
       <GlassContainer className="grow flex flex-col justify-between items-stretch p-2 ">
         <div className={"flex-1"}>
           <div className="flex flex-col flex-grow">
@@ -166,7 +128,7 @@ export function GoogleCalendarSection() {
           className={
             "bg-blue-600 rounded-xl text-white px-10 py-2 cursor-pointer"
           }
-          onClick={() => setIsNewEventModalOpen(true)}
+          onClick={() => props.setIsNewEventModalOpen(true)}
         >
           ایجاد ایونت جدید
         </button>

@@ -10,9 +10,16 @@ export default defineConfig({
   plugins: [tailwindcss(), react(), crx({ manifest })],
   build: {
     rollupOptions: {
+      input: {
+        main: "index.html",
+        background: "src/background.js",
+      },
       output: {
         // Disable code splitting for Chrome extensions
         manualChunks: undefined,
+        entryFileNames: "[name].js",
+        chunkFileNames: "[name].js",
+        assetFileNames: "[name].[ext]",
       },
     },
   },

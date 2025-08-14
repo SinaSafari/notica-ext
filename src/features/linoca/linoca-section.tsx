@@ -57,13 +57,13 @@ export function LinocaSection() {
               .map((i) => {
                 return (
                   <GlassContainer
-                    className="flex flex-col justify-center items-center w-24 h-24 bg-white gap-2 relative"
+                    className="flex flex-col justify-center items-center w-24 h-24 bg-white gap-2 relative rounded-4xl"
                     onClick={() => {
                       window.location.href = i.link;
                     }}
                   >
                     <div
-                      className="absolute top-0 left-0 w-5 h-5 bg-gray-200 rounded-full m-1 flex items-center justify-center cursor-pointer"
+                      className="absolute top-0 left-0 w-5 h-5 bg-gray-200 rounded-full m-2 flex items-center justify-center cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
                         removeBookmark(i.id);

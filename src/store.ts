@@ -58,6 +58,10 @@ interface AppState {
   // banners
   banners: Array<{ image: string; position: string }>;
   setBanners: (data: Array<{ image: string; position: string }>) => void;
+
+  // google
+  googleToken: string;
+  setGoogleToken: (token: string) => void;
 }
 
 export const useAppState = create<AppState>()(
@@ -156,6 +160,10 @@ export const useAppState = create<AppState>()(
       ],
       setBanners: (data: Array<{ image: string; position: string }>) => {
         set({ banners: [...data] });
+      },
+      googleToken: "",
+      setGoogleToken: (token: string) => {
+        set({ googleToken: token });
       },
     }),
     { name: "app-stare" }

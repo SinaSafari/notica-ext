@@ -13,6 +13,7 @@ import { PriceTableSection } from "@/features/price-table/price-table-section";
 import { TodoListSection } from "@/features/tolo-list/todo-list-section";
 import {
   IconBrandGoogle,
+  IconLoader2,
   IconLogout,
   IconSettings,
   IconUser,
@@ -23,22 +24,30 @@ import { LoginModal } from "@/features/auth/login-modal.tsx";
 import { SettingsModal } from "@/features/settings/settings-modal.tsx";
 import { useAppState } from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
+import { CreateGoogleCalendarEvent } from "@/features/google-calendar/create-google-calendar-event";
 
 export function MainPage() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
 
-  const { linocaShown, selectedBg } = useAppState(
+  const { linocaShown, selectedBg, googleToken, setGoogleToken } = useAppState(
     useShallow((state) => {
       return {
         linocaShown: state.linocaShown,
         toggleLinocaShown: state.toggleLinocaShown,
         selectedBg: state.selectedBg,
+        googleToken: state.googleToken,
+        setGoogleToken: state.setGoogleToken,
       };
     })
   );
-  console.log("selectedBg", selectedBg);
 
+  const [isNewEventModalOpen, setIsNewEventModalOpen] =
+    useState<boolean>(false);
+  console.log("selectedBg", selectedBg);
+  console.log("google token", googleToken);
+
+  const [isGoogleLoginPending, setIsGoogleLoginPending] = useState(false);
   return (
     <>
       <Modal
@@ -53,6 +62,16 @@ export function MainPage() {
       >
         <LoginModal onClose={() => setIsLoginModalOpen(false)} />
       </Modal>
+
+      <Modal
+        isOpen={isNewEventModalOpen}
+        onClose={() => setIsNewEventModalOpen(false)}
+      >
+        <CreateGoogleCalendarEvent
+          selectedDay={new Date().toISOString()}
+          setIsNewEventModalOpen={setIsNewEventModalOpen}
+        />
+      </Modal>
       <div
         className={`h-screen w-screen grid place-items-center bg-[url(/bgs/2.jpg)] bg-cover bg-center `}
       >
@@ -65,7 +84,7 @@ export function MainPage() {
             </div>
             <div className="flex items-center justify-end gap-4">
               <div
-                className="w-12 h-12  bg-white shadow-lg ring-1 ring-black/20  border border-slate-300 backdrop-blur-sm rounded-lg grid place-items-center"
+                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center"
                 onClick={async () => {
                   setIsLoginModalOpen(true);
                   // const res = await fetch(
@@ -86,34 +105,43 @@ export function MainPage() {
               </div>
 
               <div
-                className="w-12 h-12  bg-white shadow-lg ring-1 ring-black/20  border border-slate-300 backdrop-blur-sm rounded-lg grid place-items-center"
+                className="w-12 h-12  bg-white/50 backdrop-blur-sm rounded-full grid place-items-center"
                 onClick={async () => {
-                  // @ts-ignore
+                  console.log("chrome login started");
+                  setIsGoogleLoginPending(true);
+                  //@ts-ignore
                   chrome.identity.getAuthToken(
                     { interactive: true },
-                    async (token: string) => {
-                      // @ts-ignore
-                      if (chrome.runtime.lastError || !token) {
-                        console.log("login failed");
+                    //@ts-ignore
+                    (token) => {
+                      if (token) {
+                        setGoogleToken(token);
                       } else {
-                        console.log("google auth successful:", token);
+                        console.log("authentication failed");
                       }
+                      setIsGoogleLoginPending(false);
                     }
                   );
                 }}
               >
-                <IconBrandGoogle />
+                {isGoogleLoginPending ? (
+                  <>
+                    <IconLoader2 />
+                  </>
+                ) : (
+                  <IconBrandGoogle />
+                )}
               </div>
 
               <div
-                className="w-12 h-12  bg-white shadow-lg ring-1 ring-black/20  border border-slate-300 backdrop-blur-sm rounded-lg grid place-items-center"
+                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center"
                 onClick={() => {
                   setIsSettingModalOpen(true);
                 }}
               >
                 <IconSettings />
               </div>
-              <div className="w-12 h-12  bg-white shadow-lg ring-1 ring-black/20  border border-slate-300 backdrop-blur-sm rounded-lg grid place-items-center">
+              <div className="w-12 h-12  bg-white/50 0 backdrop-blur-sm rounded-full grid place-items-center">
                 <IconLogout />
               </div>
             </div>
@@ -162,9 +190,12 @@ export function MainPage() {
               )}
             </div>
 
-            <GlassContainer className="  flex flex-col justify-between items-stretch gap-4 w-1/4">
+            <GlassContainer className="flex flex-col justify-between items-stretch gap-4 w-1/4">
               <GoogleEventsSection />
-              <GoogleCalendarSection />
+              <GoogleCalendarSection
+                isNewEventModalOpen={isNewEventModalOpen}
+                setIsNewEventModalOpen={setIsNewEventModalOpen}
+              />
             </GlassContainer>
           </div>
         </div>
