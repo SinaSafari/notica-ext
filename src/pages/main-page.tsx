@@ -118,7 +118,6 @@ export function MainPage() {
               <div
                 className="w-12 h-12  bg-white/50 backdrop-blur-sm rounded-full grid place-items-center"
                 onClick={async () => {
-                  console.log("chrome login started");
                   setIsGoogleLoginPending(true);
                   //@ts-ignore
                   chrome.identity.getAuthToken(

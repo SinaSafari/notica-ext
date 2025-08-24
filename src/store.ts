@@ -27,7 +27,16 @@ export type Chore = {
   minute: string;
 };
 
+type WeatherCity = {
+  name: string;
+  title: string;
+  lat: number;
+  lng: number;
+};
+
 interface AppState {
+  selectedCity: WeatherCity;
+  setSelectedCity: (newCity: WeatherCity) => void;
   chores: Array<Chore>;
   addChore: (data: Chore) => void;
   linocaLinks: Array<BookMark>;
@@ -77,6 +86,15 @@ interface AppState {
 export const useAppState = create<AppState>()(
   persist(
     (set, get) => ({
+      selectedCity: {
+        name: "tehran",
+        title: "تهران",
+        lat: 35.69439,
+        lng: 51.42151,
+      },
+      setSelectedCity(newCity) {
+        set({ selectedCity: newCity });
+      },
       chores: [
         {
           icon: "/chore/Brake.svg",

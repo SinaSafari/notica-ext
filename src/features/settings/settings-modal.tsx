@@ -8,9 +8,25 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { useState } from "react";
-import { useAppState } from "@/store.ts";
+import { useAppState, type WeatherCity } from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
 import { IconBrandGoogle } from "@tabler/icons-react";
+import { useQueryClient } from "@tanstack/react-query";
+
+const weatherCities: Array<WeatherCity> = [
+  {
+    name: "tehran",
+    title: "تهران",
+    lat: 35.69439,
+    lng: 51.42151,
+  },
+  {
+    name: "tabriz",
+    title: "تبریز",
+    lat: 38.0792,
+    lng: 46.2887,
+  },
+];
 
 type SettingsModalProps = {
   onClose: () => void;
@@ -19,10 +35,13 @@ type SettingsModalProps = {
 type Menus = "account" | "background" | "general_settings" | "privacy";
 
 export function SettingsModal(props: SettingsModalProps) {
-  const { setSelectedBg } = useAppState(
+  const queryClient = useQueryClient();
+  const { setSelectedBg, selectedCity, setSelectedCity } = useAppState(
     useShallow((state) => {
       return {
         setSelectedBg: state.setSelectedBg,
+        selectedCity: state.selectedCity,
+        setSelectedCity: state.setSelectedCity,
       };
     })
   );
@@ -365,11 +384,20 @@ export function SettingsModal(props: SettingsModalProps) {
                   /> */}
                   <select
                     className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                    defaultValue={"tehran"}
+                    value={selectedCity.name}
+                    onChange={async (e) => {
+                      const found = weatherCities.find(
+                        (i) => i.name === e.target.value
+                      );
+                      await queryClient.invalidateQueries({
+                        queryKey: ["weather", selectedCity.name],
+                      });
+                      setSelectedCity(found!);
+                    }}
                   >
-                    <option value={"tehran"}>تهران</option>
-                    <option value={"karaj"}>کرج</option>
-                    <option value={"tabriz"}>تبریز</option>
+                    {weatherCities.map((c) => {
+                      return <option value={c.name}>{c.title}</option>;
+                    })}
                   </select>
                 </div>
                 <div className={"max-h-[52px] flex flex-row-reverse"}>
