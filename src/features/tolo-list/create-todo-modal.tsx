@@ -112,19 +112,22 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
           <div className={"max-h-[52px] flex flex-row-reverse"}>
             <button
               className={
-                "bg-blue-600 rounded-xl text-white px-10 py-2 cursor-pointer"
+                "bg-blue-600 rounded-xl text-white px-10 py-2 cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
               }
               onClick={() => {
-                createTodo(
-                  taskTitle,
-                  taskDescription,
-                  selectedTag,
-                  new Date(),
-                  "pending",
-                  new Date()
-                );
+                if (taskTitle) {
+                  createTodo(
+                    taskTitle,
+                    taskDescription,
+                    selectedTag,
+                    new Date(),
+                    "pending",
+                    new Date()
+                  );
+                }
                 props.onClose();
               }}
+              disabled={taskTitle == ""}
             >
               ذخیره
             </button>

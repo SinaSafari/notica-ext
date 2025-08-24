@@ -177,7 +177,13 @@ export function TodoListSection() {
                     ></div>
                   </div>
                 </div>
-                <div className="h-10 w-10 bg-blue-600 rounded-2xl flex justify-center items-center">
+                <div
+                  className={`h-10 w-10 rounded-2xl flex justify-center items-center ${
+                    form.getValues().title === ""
+                      ? "bg-gray-400 "
+                      : "bg-blue-600 "
+                  }`}
+                >
                   <IconPlus
                     color="white"
                     size={20}
@@ -186,14 +192,17 @@ export function TodoListSection() {
                       // setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen);
                       const { title, description } = form.getValues();
 
-                      createTodo(
-                        title,
-                        description,
-                        selectedTodoTag,
-                        new Date(),
-                        "pending",
-                        new Date()
-                      );
+                      if (title) {
+                        createTodo(
+                          title,
+                          description,
+                          selectedTodoTag,
+                          new Date(),
+                          "pending",
+                          new Date()
+                        );
+                      }
+
                       setIsCreateTodoFieldOpen(false);
                     }}
                   />

@@ -338,25 +338,39 @@ export function SettingsModal(props: SettingsModalProps) {
                   <label htmlFor={"password"} className={"text-right text-xs"}>
                     انتخاب زبان
                   </label>
-                  <input
+                  {/* <input
                     type={"password"}
                     name={"password"}
                     className={
                       "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
                     }
                     placeholder={"فارسی"}
-                  />
+                  /> */}
+                  <select
+                    defaultValue={"fa"}
+                    className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  >
+                    <option value={"fa"}>فارسی</option>
+                  </select>
                   <label htmlFor={"password"} className={"text-right text-xs"}>
                     تغییر شهر آب و هوایی
                   </label>
-                  <input
+                  {/* <input
                     type={"password"}
                     name={"password"}
                     className={
                       "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
                     }
                     placeholder={"تهران"}
-                  />
+                  /> */}
+                  <select
+                    className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                    defaultValue={"tehran"}
+                  >
+                    <option value={"tehran"}>تهران</option>
+                    <option value={"karaj"}>کرج</option>
+                    <option value={"tabriz"}>تبریز</option>
+                  </select>
                 </div>
                 <div className={"max-h-[52px] flex flex-row-reverse"}>
                   <button
