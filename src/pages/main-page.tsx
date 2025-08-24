@@ -25,10 +25,12 @@ import { SettingsModal } from "@/features/settings/settings-modal.tsx";
 import { useAppState } from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
 import { CreateGoogleCalendarEvent } from "@/features/google-calendar/create-google-calendar-event";
+import { ChoreSettingModal } from "@/features/chores/chore-setting-modal";
 
 export function MainPage() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSettingModalOpen, setIsSettingModalOpen] = useState(false);
+  const [isChoreModalOpen, setIsChoreModalOpen] = useState<boolean>(false);
 
   const { linocaShown, selectedBg, googleToken, setGoogleToken } = useAppState(
     useShallow((state) => {
@@ -64,6 +66,13 @@ export function MainPage() {
       </Modal>
 
       <Modal
+        isOpen={isChoreModalOpen}
+        onClose={() => setIsChoreModalOpen(false)}
+      >
+        <ChoreSettingModal onClose={() => setIsChoreModalOpen(false)} />
+      </Modal>
+
+      <Modal
         isOpen={isNewEventModalOpen}
         onClose={() => setIsNewEventModalOpen(false)}
       >
@@ -73,9 +82,11 @@ export function MainPage() {
         />
       </Modal>
       <div
-        className={`h-screen w-screen grid place-items-center bg-[url(/bgs/2.jpg)] bg-cover bg-center `}
+        //@ts-ignore
+        style={{ "--bg-image": `url(${selectedBg})` }}
+        className={`h-screen w-screen grid place-items-center bg-[image:var(--bg-image)] bg-cover bg-center`}
       >
-        <div className="w-10/12 h-10/12   flex flex-col items-stretch gap-4">
+        <div className="max-w-[1536px] h-[876px]  flex flex-col items-stretch gap-4">
           {/* profile start */}
           <div className="flex w-full justify-between items-center h-20  ">
             <div className="flex items-center justify-start flex-row-reverse">
@@ -151,11 +162,14 @@ export function MainPage() {
           {/* google search start */}
 
           <div className="flex w-full justify-between items-center gap-4 ">
-            <GlassContainer className="w-4/6 h-20">
+            <GlassContainer className="w-full h-20">
               <GoogleSearchSection />
             </GlassContainer>
-            <GlassContainer className="w-2/6 h-20">
-              <ChoresSection />
+            <GlassContainer className="max-w-[384px] h-20">
+              <ChoresSection
+                isChoreModalOpen={isChoreModalOpen}
+                setIsChoreModalOpen={setIsChoreModalOpen}
+              />
             </GlassContainer>
           </div>
           {/* google search  end */}

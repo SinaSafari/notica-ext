@@ -122,8 +122,9 @@ export function GoogleEventsSection() {
     enabled: !!googleToken,
   });
   return (
-    <GlassContainer className="grow flex items-stretch flex-col max-h-[230px] gap-2">
+    <GlassContainer className="grow flex items-stretch flex-col max-h-[230px] gap-2 rounded-4xl">
       <p className={"text-lg font-bold"}>امروز چه خبره؟</p>
+      {!googleToken && <p className="text-center">خبری نیست!</p>}
       {data?.map((item) => {
         return (
           <div

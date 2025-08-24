@@ -90,10 +90,10 @@ export function PriceTableSection() {
   });
 
   return (
-    <GlassContainer className="grow flex flex-col items-stretch gap-4">
+    <GlassContainer className="grow flex flex-col items-stretch gap-4 max-h-[240px]">
       <p className={"text-xl font-bold text-right"}>الان چند؟</p>
       <div
-        className={"flex flex-col flex-1 items-stretch gap-3 justify-around"}
+        className={"flex flex-col flex-1 items-stretch gap-2 justify-around"}
       >
         {data &&
           data.map((item) => {

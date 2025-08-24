@@ -4,6 +4,7 @@ import { useAppState } from "@/store";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useShallow } from "zustand/shallow";
+import { LoginForm } from "./login-form";
 
 type LoginPage =
   | "login"
@@ -16,8 +17,7 @@ type LoginModal = {
 };
 export function LoginModal(props: LoginModal) {
   const [page, setPage] = useState<LoginPage>("login");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
 
   const queryClient = useQueryClient();
@@ -31,7 +31,7 @@ export function LoginModal(props: LoginModal) {
     })
   );
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (email: string, password: string) => {
     try {
       setIsLoading(true);
       const res = await fetch(
@@ -69,65 +69,13 @@ export function LoginModal(props: LoginModal) {
         >
           {page === "login" ? (
             <>
-              <p className={"text-center text-xl font-bold"}>
-                به نوتیکا خوش آمدید
-              </p>
-              <p className={"text-center text-xs"}>
-                برای استفاده از نوتیکا ایمیل خود را وارد کنید.
-              </p>
-              <label htmlFor={"email"} className={"text-right"}>
-                ایمیل
-              </label>
-              <input
-                type={"email"}
-                name={"email"}
-                className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                }
-                placeholder={"ایمیل"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label htmlFor={"password"} className={"text-right"}>
-                رمز عبور
-              </label>
-              <input
-                type={"password"}
-                name={"password"}
-                className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                }
-                placeholder={"رمز عبور شما"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <p className={"text-xs text-right"}>
-                <span>رمز عبور خود را فراموش کردید؟</span>
-                <span className={"underline text-blue-600 cursor-pointer mx-1"}>
-                  کلیک کنید
-                </span>
-              </p>
-              <button
-                className={
-                  "rounded-xl py-2 cursor-pointer bg-blue-600 text-white"
-                }
-                onClick={() => {
-                  //   props.onClose();
-                  handleSubmit();
+              <LoginForm
+                forgetPasswordHandler={() => setPage("register:email")}
+                loginHander={(email, password) => {
+                  handleSubmit(email, password);
                 }}
-                disabled={isLoading}
-              >
-                ورود به نوتیکا
-              </button>
-              <p className={"text-xs text-center"}>
-                <span>می‌خواهید ثبت نام کنید؟</span>
-                <span
-                  className={"underline text-blue-600 cursor-pointer mx-1"}
-                  onClick={() => setPage("register:email")}
-                >
-                  ثبت نام در نوتیکا
-                </span>
-              </p>
+                loading={isLoading}
+              />
             </>
           ) : page === "register:email" ? (
             <>

@@ -13,14 +13,24 @@ type TodoItem = {
   status: TodoStatus;
 };
 
-type BookMark = {
+export type BookMark = {
   id: string;
   title: string;
   link: string;
   favicon?: string;
 };
 
+export type Chore = {
+  icon: string;
+  time: string;
+  hour: string;
+  minute: string;
+};
+
 interface AppState {
+  chores: Array<Chore>;
+  addChore: (data: Chore) => void;
+  linocaLinks: Array<BookMark>;
   linocaShown: boolean;
   toggleLinocaShown: () => void;
   selectedBg: string;
@@ -67,6 +77,55 @@ interface AppState {
 export const useAppState = create<AppState>()(
   persist(
     (set, get) => ({
+      chores: [
+        {
+          icon: "/chore/Brake.svg",
+          time: "",
+          hour: "",
+          minute: "",
+        },
+        {
+          icon: "/chore/Breakfast.svg",
+          time: "",
+          hour: "",
+          minute: "",
+        },
+        {
+          icon: "/chore/Coffee.svg",
+          time: "",
+          hour: "",
+          minute: "",
+        },
+        {
+          icon: "/chore/Food.svg",
+          time: "",
+          hour: "",
+          minute: "",
+        },
+        {
+          icon: "/chore/Pill.svg",
+          time: "",
+          hour: "",
+          minute: "",
+        },
+        {
+          icon: "/chore/Smooking.svg",
+          time: "",
+          hour: "",
+          minute: "",
+        },
+      ],
+      addChore: (data) => {
+        const filteredData = get().chores.map((i) => {
+          if (i.icon === data.icon) {
+            i = { ...data };
+          }
+          return i;
+        });
+        // const e = get().chores.filter((i) => i.icon !== data.icon);
+        set({ chores: filteredData });
+      },
+      linocaLinks: [],
       linocaShown: false,
       toggleLinocaShown: () => {
         const state = get();

@@ -5,7 +5,6 @@ import {
   type DateData,
 } from "./_hooks/use-custom-calendar.ts";
 import { useEffect, useState } from "react";
-import { Modal } from "@/components/modal.tsx";
 import { useAppState } from "@/store.ts";
 import { useShallow } from "zustand/shallow";
 
@@ -130,7 +129,11 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
           }
           onClick={() => props.setIsNewEventModalOpen(true)}
         >
-          ایجاد ایونت جدید
+          {googleToken ? (
+            <>ایجاد ایونت جدید</>
+          ) : (
+            <>حساب گوگل رو به توتیکا وصل کردید؟</>
+          )}
         </button>
       </GlassContainer>
     </>
