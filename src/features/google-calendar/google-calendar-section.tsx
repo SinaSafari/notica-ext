@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from "react";
 import { useAppState } from "@/store.ts";
 import { useShallow } from "zustand/shallow";
+import { IconLoader2 } from "@tabler/icons-react";
 
 const persianDays = ["ش", "ی", "د", "س", "چ", "پ", "ج"]; // Sunday to Saturday
 
@@ -21,9 +22,9 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
   const [calendarData, setCalendarData] = useState<CalendarData | null>(null);
   const [nextMonthCalendarData, setNextMonthCalendarData] =
     useState<CalendarData | null>(null);
-  console.log({ nextMonthCalendarData });
 
   const [selectedDate, setSelectedDate] = useState<DateData | null>(null);
+  const [isGoogleLoginPending, setIsGoogleLoginPending] = useState(false);
 
   useEffect(() => {
     const calendarData = generateCalendarData(new Date());
@@ -36,10 +37,11 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
   // const [isNewEventModalOpen, setIsNewEventModalOpen] =
   //   useState<boolean>(false);
 
-  const { googleToken } = useAppState(
+  const { googleToken, setGoogleToken } = useAppState(
     useShallow((state) => {
       return {
         googleToken: state.googleToken,
+        setGoogleToken: state.setGoogleToken,
       };
     })
   );
@@ -127,12 +129,39 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
           className={
             "bg-blue-600 rounded-xl text-white px-10 py-2 cursor-pointer"
           }
-          onClick={() => props.setIsNewEventModalOpen(true)}
+          onClick={async () => {
+            if (googleToken) {
+              props.setIsNewEventModalOpen(true);
+            } else {
+              setIsGoogleLoginPending(true);
+              //@ts-ignore
+              chrome.identity.getAuthToken(
+                { interactive: true },
+                //@ts-ignore
+                (token) => {
+                  if (token) {
+                    setGoogleToken(token);
+                  } else {
+                    console.log("authentication failed");
+                  }
+                  setIsGoogleLoginPending(false);
+                }
+              );
+            }
+          }}
         >
-          {googleToken ? (
-            <>ایجاد ایونت جدید</>
+          {isGoogleLoginPending ? (
+            <>
+              <IconLoader2 />
+            </>
           ) : (
-            <>حساب گوگل رو به توتیکا وصل کردید؟</>
+            <>
+              {googleToken ? (
+                <>ایجاد ایونت جدید</>
+              ) : (
+                <>حساب گوگل رو به توتیکا وصل کردید؟</>
+              )}
+            </>
           )}
         </button>
       </GlassContainer>

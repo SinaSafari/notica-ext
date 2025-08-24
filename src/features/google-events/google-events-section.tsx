@@ -2,7 +2,9 @@
 
 import { GlassContainer } from "@/components/glass-container";
 import { useAppState } from "@/store";
+import { IconBrandGoogle } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { useShallow } from "zustand/shallow";
 
 const sammpleResponse = {
@@ -57,13 +59,16 @@ const sammpleResponse = {
 };
 
 export function GoogleEventsSection() {
-  const { googleToken } = useAppState(
+  const { googleToken, setGoogleToken } = useAppState(
     useShallow((state) => {
       return {
         googleToken: state.googleToken,
+        setGoogleToken: state.setGoogleToken,
       };
     })
   );
+  const [isGoogleLoginPending, setIsGoogleLoginPending] = useState(false);
+
   const { data } = useQuery({
     queryKey: ["goggle:events"],
     queryFn: async () => {
@@ -124,7 +129,34 @@ export function GoogleEventsSection() {
   return (
     <GlassContainer className="grow flex items-stretch flex-col max-h-[230px] gap-2 rounded-4xl">
       <p className={"text-lg font-bold"}>امروز چه خبره؟</p>
-      {!googleToken && <p className="text-center">خبری نیست!</p>}
+      {!googleToken && (
+        <div className="flex justify-center items-center flex-col">
+          <button
+            className="text-white  bg-[#de5246] rounded-lg text-xs cursor-pointer px-3 py-2 flex items-center justify-center gap-3"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsGoogleLoginPending(true);
+
+              //@ts-ignore
+              chrome.identity.getAuthToken(
+                { interactive: true },
+                //@ts-ignore
+                (token) => {
+                  if (token) {
+                    setGoogleToken(token);
+                  } else {
+                    console.log("authentication failed");
+                  }
+                  setIsGoogleLoginPending(false);
+                }
+              );
+            }}
+          >
+            <IconBrandGoogle />
+            <span>اتصال به گوگل</span>
+          </button>
+        </div>
+      )}
       {data?.map((item) => {
         return (
           <div
