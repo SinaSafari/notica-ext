@@ -34,6 +34,8 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
     setSelectedDate(calendarData.currentDate);
   }, []);
 
+  console.log({ nextMonthCalendarData });
+
   // const [isNewEventModalOpen, setIsNewEventModalOpen] =
   //   useState<boolean>(false);
 

@@ -2,7 +2,7 @@
 
 import { GlassContainer } from "@/components/glass-container";
 import { useAppState } from "@/store";
-import { IconBrandGoogle } from "@tabler/icons-react";
+import { IconBrandGoogle, IconLoader2 } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useShallow } from "zustand/shallow";
@@ -152,8 +152,16 @@ export function GoogleEventsSection() {
               );
             }}
           >
-            <IconBrandGoogle />
-            <span>اتصال به گوگل</span>
+            {isGoogleLoginPending ? (
+              <>
+                <IconLoader2 />
+              </>
+            ) : (
+              <>
+                <IconBrandGoogle />
+                <span>اتصال به گوگل</span>
+              </>
+            )}
           </button>
         </div>
       )}
