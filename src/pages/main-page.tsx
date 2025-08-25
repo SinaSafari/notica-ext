@@ -86,7 +86,7 @@ export function MainPage() {
         style={{ "--bg-image": `url(${selectedBg})` }}
         className={`h-screen w-screen grid place-items-center bg-[image:var(--bg-image)] bg-cover bg-center`}
       >
-        <div className="max-w-[1536px] h-[876px]  flex flex-col items-stretch gap-4">
+        <div className="max-w-[1536px] h-[876px]  flex flex-col items-stretch gap-4 w-full">
           {/* profile start */}
           <div className="flex w-full justify-between items-center h-20  ">
             <div className="flex items-center justify-start flex-row-reverse">
@@ -160,7 +160,7 @@ export function MainPage() {
 
           {/* google search start */}
 
-          <div className="flex w-full justify-between items-center gap-4 ">
+          <div className="flex w-full justify-between items-center gap-3 ">
             <GlassContainer className="w-full h-20">
               <GoogleSearchSection />
             </GlassContainer>
@@ -180,16 +180,16 @@ export function MainPage() {
 
           <LinocaSection />
 
-          <div className="flex flex-row justify-between items-stretch gap-4 grow max-h-[550px]">
-            <div className="  flex flex-col justify-between items-stretch gap-4 w-1/4">
+          <div className="flex flex-row justify-between items-stretch gap-2 grow max-h-[550px] w-full">
+            <div className="  flex flex-col justify-between items-stretch gap-4 w-[375px]">
               <TodoListSection />
             </div>
 
-            <div className="  flex flex-col justify-between items-stretch gap-4 w-1/4">
+            <div className="  flex flex-col justify-between items-stretch gap-4 w-[375px]">
               <AdsSection />
             </div>
 
-            <div className="  flex flex-col justify-between items-stretch gap-4 w-1/4">
+            <div className="  flex flex-col justify-between items-stretch gap-4 w-[375px]">
               {linocaShown ? (
                 <AdsSection />
               ) : (
@@ -203,13 +203,13 @@ export function MainPage() {
               )}
             </div>
 
-            <GlassContainer className="flex flex-col justify-between items-stretch gap-4 w-1/4">
+            <div className="flex flex-col justify-between items-stretch gap-4 w-[375px]">
               <GoogleEventsSection />
               <GoogleCalendarSection
                 isNewEventModalOpen={isNewEventModalOpen}
                 setIsNewEventModalOpen={setIsNewEventModalOpen}
               />
-            </GlassContainer>
+            </div>
           </div>
         </div>
       </div>

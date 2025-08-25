@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type TodoStatus = "done" | "pending";
+export type TodoStatus = "done" | "pending";
 export type TagType = "moderate" | "urgent" | "not-force";
 export type TodoItem = {
   id: string;
@@ -62,6 +62,7 @@ interface AppState {
     status: TodoStatus
   ) => void;
   deleteTodo: (id: string) => void;
+  toggleStatus: (id: string, newStatus: TodoStatus) => void;
 
   // bookmarks
   bookmarks: Array<BookMark>;
@@ -189,6 +190,8 @@ export const useAppState = create<AppState>()(
         const todos = get().todos;
         const todo = todos.find((i) => i.id === id);
         const filteredTodos = todos.filter((i) => i.id !== id);
+        console.log({ todos, todo, filteredTodos });
+
         set({
           todos: [
             ...filteredTodos,
@@ -207,6 +210,15 @@ export const useAppState = create<AppState>()(
       deleteTodo: (id) => {
         const d = get().todos.filter((i) => i.id !== id);
         set({ todos: d });
+      },
+      toggleStatus: (id, newStatus) => {
+        const mappedTodos = get().todos.map((i) => {
+          if (i.id === id) {
+            i.status = newStatus;
+          }
+          return i;
+        });
+        set({ todos: mappedTodos });
       },
       // bookmarks
       bookmarks: [],

@@ -2,12 +2,18 @@
 
 import { GlassContainer } from "@/components/glass-container";
 import { IconCalendar, IconPlus } from "@tabler/icons-react";
-import { useAppState, type TagType, type TodoItem } from "@/store.ts";
+import {
+  useAppState,
+  type TagType,
+  type TodoItem,
+  type TodoStatus,
+} from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
 import { useState } from "react";
 import { Modal } from "@/components/modal.tsx";
 import { CreateTodoModal } from "@/features/tolo-list/create-todo-modal.tsx";
 import { Controller, useForm } from "react-hook-form";
+import { UpdateTodoModal } from "./update-todo-modal";
 
 function formatDate(date: Date) {
   return date.toLocaleDateString("fa-IR", {
@@ -18,19 +24,23 @@ function formatDate(date: Date) {
 }
 
 export function TodoListSection() {
-  const { todos, createTodo, deleteTodo } = useAppState(
+  const { todos, createTodo, toggleStatus } = useAppState(
     useShallow((state) => {
       return {
         todos: state.todos,
         createTodo: state.createTodo,
         deleteTodo: state.deleteTodo,
+        toggleStatus: state.toggleStatus,
       };
     })
   );
-  const [isCreateTodoModalOpen, setIsCreateTodoModalOpen] = useState(false);
+  // const [isCreateTodoModalOpen, setIsCreateTodoModalOpen] = useState(false);
   const [isCreateTodoFieldOpen, setIsCreateTodoFieldOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [selectedTodoTag, setSelectedTodoTag] = useState<TagType>("urgent");
+
+  const [selectedTodo, setSelectedTodo] = useState<TodoItem | null>();
+  const [isUpdateTodoModalOpen, setIsUpdateTodoModalOpen] = useState(false);
 
   const [selectedSortFilter, setSelectedSortFilter] = useState<TagType | "all">(
     "all"
@@ -43,7 +53,6 @@ export function TodoListSection() {
       tag: "red",
     },
   });
-  console.log({ todos });
 
   function sorter(todos: Array<TodoItem>, by: TagType | "all") {
     if (selectedSortFilter === "all") {
@@ -57,16 +66,18 @@ export function TodoListSection() {
   return (
     <>
       <Modal
-        onClose={() => setIsCreateTodoModalOpen(false)}
-        isOpen={isCreateTodoModalOpen}
+        onClose={() => setIsUpdateTodoModalOpen(false)}
+        isOpen={isUpdateTodoModalOpen}
       >
-        <CreateTodoModal
-          onClose={() => setIsCreateTodoModalOpen(false)}
-          defaultTitle={taskTitle}
+        <UpdateTodoModal
+          // onClose={() => setIsCreateTodoModalOpen(false)}
+          // defaultTitle={taskTitle}
+          onClose={() => setIsUpdateTodoModalOpen(false)}
+          todo={selectedTodo!}
         />
       </Modal>
 
-      <GlassContainer className="flex flex-col justify-between items-stretch h-full gap-4">
+      <GlassContainer className="flex flex-col justify-between items-stretch h-full gap-4 w-full">
         <GlassContainer className="bg-white-20 flex items-center justify-between  rounded-2xl">
           <p className="text-lg font-bold">کارهای امروز</p>
           <div className="flex justify-end items-center gap-2">
@@ -89,6 +100,7 @@ export function TodoListSection() {
               }`}
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 if (selectedSortFilter === "not-force") {
                   setSelectedSortFilter("all");
                   return;
@@ -112,19 +124,25 @@ export function TodoListSection() {
           </div>
         </GlassContainer>
 
-        <div className="grow flex flex-col items-stretch justify-start gap-4 overflow-y-scroll">
+        <div className="grow flex flex-col items-stretch justify-start gap-2 overflow-y-scroll">
           {sorter(todos, selectedSortFilter).map((todo) => {
             return (
               <GlassContainer
                 key={todo.id.toString()}
-                className="flex justify-between items-stretch gap-4 rounded-xl bg-white-20"
+                className={`flex justify-between items-stretch gap-4 rounded-xl  ${
+                  todo.status === "done" ? "bg-white/5" : ""
+                }`}
               >
                 <div className="h-full w-4 flex flex-col justify-around items-center gap-4">
                   <input
                     type="checkbox"
                     className="w-4 h-4"
-                    onClick={() => {
-                      deleteTodo(todo.id);
+                    checked={todo.status === "done"}
+                    onClick={(e) => {
+                      const newTodoStatus: TodoStatus =
+                        todo.status === "done" ? "pending" : "done";
+
+                      toggleStatus(todo.id, newTodoStatus);
                     }}
                   />
                   {todo.tag !== null || todo.tag !== "" ? (
@@ -141,15 +159,33 @@ export function TodoListSection() {
                     ></div>
                   ) : null}
                 </div>
-                <div className="grow flex flex-col justify-between items-stretch gap-2">
+                <div
+                  className={`grow flex flex-col justify-between items-stretch gap-2`}
+                  onClick={(e) => {
+                    console.log("card clicked");
+
+                    setSelectedTodo(todo);
+                    setIsUpdateTodoModalOpen(true);
+                  }}
+                >
                   <div className="flex justify-between items-center">
-                    <p className="text-sm font-bold overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis">
+                    <p
+                      className={`text-sm font-bold overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis ${
+                        todo.status === "done" ? "text-black/10" : ""
+                      }`}
+                    >
                       {todo.title}
                     </p>
 
                     <div className="flex justify-end items-center gap-2">
                       <IconCalendar size={16} color="gray" />
-                      <p className="text-xs text-gray-500">
+                      <p
+                        className={`text-xs  ${
+                          todo.status === "done"
+                            ? "text-black/10"
+                            : "text-gray-500"
+                        }`}
+                      >
                         {todo.createdAt ? (
                           <>{formatDate(new Date(todo.createdAt))}</>
                         ) : (
@@ -158,7 +194,11 @@ export function TodoListSection() {
                       </p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-500 overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis">
+                  <p
+                    className={`text-sm  overflow-x-hidden max-w-[200px] whitespace-nowrap overflow-ellipsis ${
+                      todo.status === "done" ? "text-black/10" : "text-gray-500"
+                    }`}
+                  >
                     {todo.description}
                   </p>
                 </div>
@@ -281,14 +321,16 @@ export function TodoListSection() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  setIsCreateTodoModalOpen(true);
+                  // setIsCreateTodoModalOpen(true);
                 }}
+                onClick={() => setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen)}
               >
                 <input
                   className={"border-0 w-full outline-0"}
                   placeholder={"نوشتن کار جدید"}
                   onChange={(e) => setTaskTitle(e.target.value)}
                   value={taskTitle}
+                  disabled
                 />
                 <input type="submit" className="hidden" />
               </form>

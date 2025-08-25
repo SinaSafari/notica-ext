@@ -101,6 +101,18 @@ const linocaLinks: Array<BookMark> = [
     title: "کلاد",
     favicon: "",
   },
+  {
+    id: crypto.randomUUID(),
+    link: "https://mail.google.com/",
+    title: "جیمیل",
+    favicon: "",
+  },
+  {
+    id: crypto.randomUUID(),
+    link: "https://outlook.live.com/",
+    title: "اوتلوک",
+    favicon: "",
+  },
 ];
 
 export function LinocaSection() {
@@ -129,9 +141,9 @@ export function LinocaSection() {
         <AddBookmarkModal onClose={() => setIsAddBookmarkOpen(false)} />
       </Modal>
 
-      <div className="flex flex-row justify-start gap-4 items-stretch overflow-y-hidden overflow-x-scroll no-scrollbar">
+      <div className="flex flex-row justify-start gap-3 items-stretch overflow-y-hidden overflow-x-scroll no-scrollbar">
         <GlassContainer
-          className="flex flex-col justify-center items-center w-24 h-24 bg-white"
+          className="flex flex-col justify-center items-center w-[85px] h-[85px] bg-white"
           onClick={() => toggleLinocaShown()}
         >
           <IconCategory size={30} color="blue" />
@@ -141,8 +153,6 @@ export function LinocaSection() {
         {linocaShown ? (
           <>
             {linocaLinks.map((i) => {
-              console.log("qweqwe");
-
               return (
                 <IconContainer
                   id={i.id}
@@ -158,7 +168,7 @@ export function LinocaSection() {
           <>
             <>
               <GlassContainer
-                className="w-24 h-24 flex items-center justify-center"
+                className=" flex items-center justify-center w-[85px] h-[85px]"
                 onClick={() => {
                   setIsAddBookmarkOpen(true);
                 }}
@@ -183,7 +193,7 @@ export function LinocaSection() {
               })
               .concat(
                 <GlassContainer
-                  className="w-24 h-24 flex items-center justify-center"
+                  className=" flex items-center justify-center w-[85px] h-[85px]"
                   onClick={() => {
                     setIsAddBookmarkOpen(true);
                   }}
@@ -209,7 +219,7 @@ function IconContainer(props: IconContainer) {
   const { favicon, loading, error } = useFavicon(props.link);
   return (
     <GlassContainer
-      className="flex flex-col justify-center items-center w-24 h-24 bg-white gap-2 relative rounded-3xl"
+      className="flex flex-col justify-center items-center gap-1 w-[85px] h-[85px] bg-white relative"
       onClick={() => {
         // window.location.href = props.link;
         window.open(props.link, "_blank");
@@ -242,7 +252,7 @@ function IconContainer(props: IconContainer) {
           <img className="w-8 h-8" src={favicon as string} />
         </>
       )}
-      <p className="text-xs">{props.title}</p>
+      <p className="text-xs text-center">{props.title}</p>
     </GlassContainer>
   );
 }
