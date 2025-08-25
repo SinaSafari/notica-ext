@@ -70,8 +70,32 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
               />
             </div>
 
-            <div className="flex items-stretch gap-4 my-4">
+            <div className="flex items-stretch flex-row-reverse gap-2 my-4">
               <div
+                className={`rounded-full bg-red-500 h-4 w-4 border ${
+                  selectedTag === "urgent"
+                    ? "border-blue-500"
+                    : "border-red-500"
+                }`}
+                onClick={() => setSelectedTag("urgent")}
+              ></div>
+              <div
+                className={`rounded-full bg-yellow-500 h-4 w-4 border ${
+                  selectedTag === "moderate"
+                    ? "border-blue-500"
+                    : "border-yellow-500"
+                }`}
+                onClick={() => setSelectedTag("moderate")}
+              ></div>
+              <div
+                className={`rounded-full bg-green-500 h-4 w-4 border ${
+                  selectedTag === "not-force"
+                    ? "border-blue-500"
+                    : "border-green-500"
+                }`}
+                onClick={() => setSelectedTag("not-force")}
+              ></div>
+              {/* <div
                 onClick={() => setSelectedTag("urgent")}
                 className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
                   selectedTag === "urgent"
@@ -83,8 +107,8 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
                 <div className="flex-1">
                   <p className="text-sm">فوری</p>
                 </div>
-              </div>
-              <div
+              </div> */}
+              {/* <div
                 onClick={() => setSelectedTag("moderate")}
                 className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
                   selectedTag === "moderate"
@@ -96,8 +120,8 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
                 <div className="flex-1">
                   <p className="text-sm">مهم</p>
                 </div>
-              </div>
-              <div
+              </div> */}
+              {/* <div
                 onClick={() => setSelectedTag("not-force")}
                 className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
                   selectedTag === "not-force"
@@ -109,7 +133,7 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
                 <div className="flex-1">
                   <p className="text-sm">اگر شد</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

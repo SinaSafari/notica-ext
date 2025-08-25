@@ -78,11 +78,11 @@ export function TodoListSection() {
       </Modal>
 
       <GlassContainer className="flex flex-col justify-between items-stretch h-full gap-4 w-full">
-        <GlassContainer className="bg-white-20 flex items-center justify-between  rounded-2xl">
+        <GlassContainer className="bg-white-20 flex items-center justify-between  h-[50px]">
           <p className="text-lg font-bold">کارهای امروز</p>
           <div className="flex justify-end items-center gap-2">
             <div
-              className={`h-4 w-4 bg-red-500 rounded-full ${
+              className={`h-[10px] w-[10px] bg-red-500 rounded-full ${
                 selectedSortFilter === "urgent" ? "ring-1 to-blue-600" : ""
               }`}
               onClick={(e) => {
@@ -95,7 +95,7 @@ export function TodoListSection() {
               }}
             ></div>
             <div
-              className={`h-4 w-4 bg-green-500 rounded-full ${
+              className={`h-[10px] w-[10px] bg-green-500 rounded-full ${
                 selectedSortFilter === "not-force" ? "ring-1 to-blue-600" : ""
               }`}
               onClick={(e) => {
@@ -109,7 +109,7 @@ export function TodoListSection() {
               }}
             ></div>
             <div
-              className={`h-4 w-4 bg-yellow-300 rounded-full  ${
+              className={`h-[10px] w-[10px] bg-yellow-300 rounded-full  ${
                 selectedSortFilter === "moderate" ? "ring-1 to-blue-600" : ""
               }`}
               onClick={(e) => {
