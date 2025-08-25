@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 
 type TodoStatus = "done" | "pending";
 export type TagType = "moderate" | "urgent" | "not-force";
-type TodoItem = {
+export type TodoItem = {
   id: string;
   title: string;
   description: string;
@@ -27,7 +27,7 @@ export type Chore = {
   minute: string;
 };
 
-type WeatherCity = {
+export type WeatherCity = {
   name: string;
   title: string;
   lat: number;
@@ -61,6 +61,7 @@ interface AppState {
     dueDate: Date,
     status: TodoStatus
   ) => void;
+  deleteTodo: (id: string) => void;
 
   // bookmarks
   bookmarks: Array<BookMark>;
@@ -203,7 +204,10 @@ export const useAppState = create<AppState>()(
           ],
         });
       },
-
+      deleteTodo: (id) => {
+        const d = get().todos.filter((i) => i.id !== id);
+        set({ todos: d });
+      },
       // bookmarks
       bookmarks: [],
       addBookMark: (input) => {

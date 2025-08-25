@@ -2,7 +2,7 @@
 
 import { GlassContainer } from "@/components/glass-container";
 import { IconCalendar, IconPlus } from "@tabler/icons-react";
-import { useAppState, type TagType } from "@/store.ts";
+import { useAppState, type TagType, type TodoItem } from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
 import { useState } from "react";
 import { Modal } from "@/components/modal.tsx";
@@ -19,11 +19,12 @@ function formatDate(date: Date) {
 }
 
 export function TodoListSection() {
-  const { todos, createTodo } = useAppState(
+  const { todos, createTodo, deleteTodo } = useAppState(
     useShallow((state) => {
       return {
         todos: state.todos,
         createTodo: state.createTodo,
+        deleteTodo: state.deleteTodo,
       };
     })
   );
@@ -31,6 +32,10 @@ export function TodoListSection() {
   const [isCreateTodoFieldOpen, setIsCreateTodoFieldOpen] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [selectedTodoTag, setSelectedTodoTag] = useState<TagType>("urgent");
+
+  const [selectedSortFilter, setSelectedSortFilter] = useState<TagType | "all">(
+    "all"
+  );
 
   const form = useForm({
     defaultValues: {
@@ -40,6 +45,15 @@ export function TodoListSection() {
     },
   });
   console.log({ todos });
+
+  function sorter(todos: Array<TodoItem>, by: TagType | "all") {
+    if (selectedSortFilter === "all") {
+      return todos;
+    }
+    const top = todos.filter((i) => i.tag === by);
+    const rest = todos.filter((i) => i.tag !== by);
+    return top.concat(rest);
+  }
 
   return (
     <>
@@ -57,21 +71,63 @@ export function TodoListSection() {
         <GlassContainer className="bg-white-20 flex items-center justify-between  rounded-2xl">
           <p className="text-lg font-bold">کارهای امروز</p>
           <div className="flex justify-end items-center gap-2">
-            <div className="h-4 w-4 bg-red-500 rounded-full"></div>
-            <div className="h-4 w-4 bg-green-500 rounded-full"></div>
-            <div className="h-4 w-4 bg-yellow-300 rounded-full"></div>
+            <div
+              className={`h-4 w-4 bg-red-500 rounded-full ${
+                selectedSortFilter === "urgent" ? "ring-1 to-blue-600" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (selectedSortFilter === "urgent") {
+                  setSelectedSortFilter("all");
+                  return;
+                }
+                setSelectedSortFilter("urgent");
+              }}
+            ></div>
+            <div
+              className={`h-4 w-4 bg-green-500 rounded-full ${
+                selectedSortFilter === "not-force" ? "ring-1 to-blue-600" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (selectedSortFilter === "not-force") {
+                  setSelectedSortFilter("all");
+                  return;
+                }
+                setSelectedSortFilter("not-force");
+              }}
+            ></div>
+            <div
+              className={`h-4 w-4 bg-yellow-300 rounded-full  ${
+                selectedSortFilter === "moderate" ? "ring-1 to-blue-600" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (selectedSortFilter === "moderate") {
+                  setSelectedSortFilter("all");
+                  return;
+                }
+                setSelectedSortFilter("moderate");
+              }}
+            ></div>
           </div>
         </GlassContainer>
 
-        <div className="grow flex flex-col items-stretch justify-start gap-4">
-          {todos.map((todo) => {
+        <div className="grow flex flex-col items-stretch justify-start gap-4 overflow-y-scroll">
+          {sorter(todos, selectedSortFilter).map((todo) => {
             return (
               <GlassContainer
                 key={todo.id.toString()}
                 className="flex justify-between items-stretch gap-4 rounded-xl bg-white-20"
               >
                 <div className="h-full w-4 flex flex-col justify-around items-center gap-4">
-                  <input type="checkbox" className="w-4 h-4" />
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4"
+                    onClick={() => {
+                      deleteTodo(todo.id);
+                    }}
+                  />
                   {todo.tag !== null || todo.tag !== "" ? (
                     <div
                       className={`h-3 w-3 ${
@@ -88,7 +144,9 @@ export function TodoListSection() {
                 </div>
                 <div className="grow flex flex-col justify-between items-stretch gap-2">
                   <div className="flex justify-between items-center">
-                    <p className="text-sm font-bold">{todo.title}</p>
+                    <p className="text-sm font-bold overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis">
+                      {todo.title}
+                    </p>
 
                     <div className="flex justify-end items-center gap-2">
                       <IconCalendar size={16} color="gray" />
@@ -101,7 +159,9 @@ export function TodoListSection() {
                       </p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-500">{todo.description}</p>
+                  <p className="text-sm text-gray-500 overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis">
+                    {todo.description}
+                  </p>
                 </div>
               </GlassContainer>
             );
@@ -124,6 +184,7 @@ export function TodoListSection() {
                         placeholder={"عنوان کار جدید"}
                         onChange={field.onChange}
                         value={field.value}
+                        maxLength={50}
                       />
                     );
                   }}
@@ -202,6 +263,7 @@ export function TodoListSection() {
                           "pending",
                           new Date()
                         );
+                        form.reset();
                       }
 
                       setIsCreateTodoFieldOpen(false);

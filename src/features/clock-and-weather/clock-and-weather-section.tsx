@@ -8,34 +8,102 @@ import { useEffect, useState } from "react";
 import { useShallow } from "zustand/shallow";
 
 const WEATHER_CODES = {
-  0: { description: "Clear sky", icon: "☀️" },
-  1: { description: "Mainly clear", icon: "🌤️" },
-  2: { description: "Partly cloudy", icon: "⛅" },
-  3: { description: "Overcast", icon: "☁️" },
-  45: { description: "Fog", icon: "🌫️" },
-  48: { description: "Depositing rime fog", icon: "🌫️" },
-  51: { description: "Light drizzle", icon: "🌦️" },
-  53: { description: "Moderate drizzle", icon: "🌦️" },
-  55: { description: "Dense drizzle", icon: "🌦️" },
-  56: { description: "Light freezing drizzle", icon: "🌨️" },
-  57: { description: "Dense freezing drizzle", icon: "🌨️" },
-  61: { description: "Slight rain", icon: "🌧️" },
-  63: { description: "Moderate rain", icon: "🌧️" },
-  65: { description: "Heavy rain", icon: "🌧️" },
-  66: { description: "Light freezing rain", icon: "🌨️" },
-  67: { description: "Heavy freezing rain", icon: "🌨️" },
-  71: { description: "Slight snow fall", icon: "🌨️" },
-  73: { description: "Moderate snow fall", icon: "❄️" },
-  75: { description: "Heavy snow fall", icon: "❄️" },
-  77: { description: "Snow grains", icon: "🌨️" },
-  80: { description: "Slight rain showers", icon: "🌦️" },
-  81: { description: "Moderate rain showers", icon: "🌦️" },
-  82: { description: "Violent rain showers", icon: "⛈️" },
-  85: { description: "Slight snow showers", icon: "🌨️" },
-  86: { description: "Heavy snow showers", icon: "❄️" },
-  95: { description: "Slight or moderate thunderstorm", icon: "⛈️" },
-  96: { description: "Thunderstorm with slight hail", icon: "⛈️" },
-  99: { description: "Thunderstorm with heavy hail", icon: "⛈️" },
+  0: { description: "Clear sky", icon: "☀️", img: "/weather/sun.png" },
+  1: { description: "Mainly clear", icon: "🌤️", img: "/weather/cloudy-1.png" },
+  2: { description: "Partly cloudy", icon: "⛅", img: "/weather/cloudy.png" },
+  3: { description: "Overcast", icon: "☁️", img: "/weather/cloudy.png" },
+  45: { description: "Fog", icon: "🌫️", img: "/weather/cloudy.png" },
+  48: {
+    description: "Depositing rime fog",
+    icon: "🌫️",
+    img: "/weather/cloudy.png",
+  },
+  51: { description: "Light drizzle", icon: "🌦️", img: "/weather/drizzle.png" },
+  53: {
+    description: "Moderate drizzle",
+    icon: "🌦️",
+    img: "/weather/drizzle.png",
+  },
+  55: { description: "Dense drizzle", icon: "🌦️", img: "/weather/drizzle.png" },
+  56: {
+    description: "Light freezing drizzle",
+    icon: "🌨️",
+    img: "/weather/drizzle.png",
+  },
+  57: {
+    description: "Dense freezing drizzle",
+    icon: "🌨️",
+    img: "/weather/drizzle.png",
+  },
+  61: { description: "Slight rain", icon: "🌧️", img: "/weather/downpour.png" },
+  63: {
+    description: "Moderate rain",
+    icon: "🌧️",
+    img: "/weather/downpour.png",
+  },
+  65: { description: "Heavy rain", icon: "🌧️", img: "/weather/downpour.png" },
+  66: {
+    description: "Light freezing rain",
+    icon: "🌨️",
+    img: "/weather/freezing-rain.png",
+  },
+  67: {
+    description: "Heavy freezing rain",
+    icon: "🌨️",
+    img: "/weather/freezing-rain.png",
+  },
+  71: {
+    description: "Slight snow fall",
+    icon: "🌨️",
+    img: "/weather/freezing-rain.png",
+  },
+  73: {
+    description: "Moderate snow fall",
+    icon: "❄️",
+    img: "/weather/snow.png",
+  },
+  75: { description: "Heavy snow fall", icon: "❄️", img: "/weather/snow.png" },
+  77: { description: "Snow grains", icon: "🌨️", img: "/weather/snow.png" },
+  80: {
+    description: "Slight rain showers",
+    icon: "🌦️",
+    img: "/weather/heavy-rain.png",
+  },
+  81: {
+    description: "Moderate rain showers",
+    icon: "🌦️",
+    img: "/weather/heavy-rain.png",
+  },
+  82: {
+    description: "Violent rain showers",
+    icon: "⛈️",
+    img: "/weather/heavy-rain.png",
+  },
+  85: {
+    description: "Slight snow showers",
+    icon: "🌨️",
+    img: "/weather/heavy-rain.png",
+  },
+  86: {
+    description: "Heavy snow showers",
+    icon: "❄️",
+    img: "/weather/storm.png",
+  },
+  95: {
+    description: "Slight or moderate thunderstorm",
+    icon: "⛈️",
+    img: "/weather/storm.png",
+  },
+  96: {
+    description: "Thunderstorm with slight hail",
+    icon: "⛈️",
+    img: "/weather/storm.png",
+  },
+  99: {
+    description: "Thunderstorm with heavy hail",
+    icon: "⛈️",
+    img: "/weather/storm.png",
+  },
 };
 
 export function ClockAndWeatherSection() {
@@ -116,12 +184,15 @@ export function ClockAndWeatherSection() {
                 <p className={"font-black text-5xl text-blue-600"}>
                   {data.current}&deg;
                 </p>
-                <div
+                {/* <div
                   className={`w-12 h-12 flex items-center justify-center text-4xl`}
                 >
                   {data.code.icon}
-                </div>
-                {/* <img src={"/weather.png"} className={`w-12 h-12`} /> */}
+                </div> */}
+                <img
+                  src={data.code.img}
+                  className={`w-12 h-12 flex items-center justify-center `}
+                />
               </div>
               <p className={"text-center"}>هوا هوای کاره!</p>
               <div className={"flex justify-center items-center w-full gap-4"}>
