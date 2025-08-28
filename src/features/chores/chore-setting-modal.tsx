@@ -1,18 +1,58 @@
 import { GlassContainer } from "@/components/glass-container";
-import { useAppState } from "@/store";
+import { useAppState, type Chore } from "@/store";
 import { useState } from "react";
 import { useShallow } from "zustand/shallow";
+
+const defaultChores: Array<Chore> = [
+  {
+    icon: "/chore/Brake.svg",
+    time: "",
+    hour: "",
+    minute: "",
+  },
+  {
+    icon: "/chore/Breakfast.svg",
+    time: "",
+    hour: "",
+    minute: "",
+  },
+  {
+    icon: "/chore/Coffee.svg",
+    time: "",
+    hour: "",
+    minute: "",
+  },
+  {
+    icon: "/chore/Food.svg",
+    time: "",
+    hour: "",
+    minute: "",
+  },
+  {
+    icon: "/chore/Pill.svg",
+    time: "",
+    hour: "",
+    minute: "",
+  },
+  {
+    icon: "/chore/Smooking.svg",
+    time: "",
+    hour: "",
+    minute: "",
+  },
+];
 
 type ChoreSettingModalProps = {
   onClose: () => void;
 };
 
 export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
-  const { chores, addChore } = useAppState(
+  const { chores, addChore, deleteChore } = useAppState(
     useShallow((state) => {
       return {
         chores: state.chores,
         addChore: state.addChore,
+        deleteChore: state.deleteChore,
       };
     })
   );
@@ -32,9 +72,11 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
             "rounded-2xl bg-[#F8FAFC]  flex-1 ring-1 ring-slate-200 text-right flex flex-col justify-between items-stretch gap-4 p-2"
           }
         >
+          <p className="text-xl "> مدیریت کارهای روزانه</p>
+
           <div className="flex-1">
             <div className="flex items-center gap-4 mb-4">
-              {chores.map((c) => {
+              {defaultChores.map((c) => {
                 return (
                   <GlassContainer
                     className={`w-[53px] h-[56px] rounded-2xl flex items-center justify-center border  ${
@@ -52,8 +94,14 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
               })}
             </div>
 
-            {chores.map((c) => {
-              console.log({ as: c.icon === selectedChore });
+            {defaultChores.map((c) => {
+              const alreadyRegisteredChore = chores.find(
+                (i) => i.icon === c.icon
+              );
+              let ch = c;
+              if (alreadyRegisteredChore) {
+                ch = alreadyRegisteredChore;
+              }
 
               return (
                 <>
@@ -66,9 +114,9 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
                       <label>ساعت</label>
                       <select
                         className="w-full rounded-xl border border-slate-300 p-2"
-                        value={c.hour || "00"}
+                        value={ch.hour || "00"}
                         onChange={(e) =>
-                          addChore({ ...c, hour: e.target.value })
+                          addChore({ ...ch, hour: e.target.value })
                         }
                       >
                         {Array.from({ length: 25 }).map((_, i) => {
@@ -86,9 +134,9 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
                       <label>دقیقه</label>
                       <select
                         className="w-full rounded-xl border border-slate-300 p-2"
-                        value={c.minute || "00"}
+                        value={ch.minute || "00"}
                         onChange={(e) =>
-                          addChore({ ...c, minute: e.target.value })
+                          addChore({ ...ch, minute: e.target.value })
                         }
                       >
                         {Array.from({ length: 60 }).map((_, i) => {
@@ -102,6 +150,22 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
                         })}
                       </select>
                     </div>
+                  </div>
+
+                  <div
+                    className={`flex justify-end items-center w-full my-4 ${
+                      c.icon === selectedChore ? "" : "hidden"
+                    }`}
+                  >
+                    <button
+                      className="p-2 bg-red-500 text-white rounded-xl"
+                      onClick={() => {
+                        deleteChore(ch.icon);
+                        onClose();
+                      }}
+                    >
+                      حذف تایمر کار های روزانه
+                    </button>
                   </div>
                 </>
               );

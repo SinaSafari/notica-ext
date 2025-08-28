@@ -39,6 +39,7 @@ interface AppState {
   setSelectedCity: (newCity: WeatherCity) => void;
   chores: Array<Chore>;
   addChore: (data: Chore) => void;
+  deleteChore: (id: string) => void;
   linocaLinks: Array<BookMark>;
   linocaShown: boolean;
   toggleLinocaShown: () => void;
@@ -97,53 +98,31 @@ export const useAppState = create<AppState>()(
       setSelectedCity(newCity) {
         set({ selectedCity: newCity });
       },
-      chores: [
-        {
-          icon: "/chore/Brake.svg",
-          time: "",
-          hour: "",
-          minute: "",
-        },
-        {
-          icon: "/chore/Breakfast.svg",
-          time: "",
-          hour: "",
-          minute: "",
-        },
-        {
-          icon: "/chore/Coffee.svg",
-          time: "",
-          hour: "",
-          minute: "",
-        },
-        {
-          icon: "/chore/Food.svg",
-          time: "",
-          hour: "",
-          minute: "",
-        },
-        {
-          icon: "/chore/Pill.svg",
-          time: "",
-          hour: "",
-          minute: "",
-        },
-        {
-          icon: "/chore/Smooking.svg",
-          time: "",
-          hour: "",
-          minute: "",
-        },
-      ],
+      chores: [],
+      deleteChore: (id: string) => {
+        const newChores = get().chores.filter((i) => i.icon !== id);
+        set({ chores: newChores });
+      },
       addChore: (data) => {
-        const filteredData = get().chores.map((i) => {
-          if (i.icon === data.icon) {
-            i = { ...data };
-          }
-          return i;
-        });
-        // const e = get().chores.filter((i) => i.icon !== data.icon);
-        set({ chores: filteredData });
+        console.log({ data });
+
+        const chores = get().chores;
+
+        const alreadyRegistered = chores.findIndex((i) => i.icon === data.icon);
+
+        if (alreadyRegistered >= 0) {
+          console.log("alreadyRegistered", alreadyRegistered);
+
+          chores[alreadyRegistered] = data;
+          set({ chores: chores });
+        } else {
+          const x = [...chores, data];
+          console.log({ x });
+
+          set({ chores: [...chores, data] });
+        }
+
+        console.log({ state: chores });
       },
       linocaLinks: [],
       linocaShown: false,
@@ -151,7 +130,7 @@ export const useAppState = create<AppState>()(
         const state = get();
         set({ linocaShown: !state.linocaShown });
       },
-      selectedBg: "/bgs/2.jpg",
+      selectedBg: "/bgs/02.jpg",
       setSelectedBg: (bg: string) => {
         set({ selectedBg: bg });
       },

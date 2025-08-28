@@ -7,6 +7,7 @@ type PriceItemProps = {
   icon?: string;
   changeRate: number;
   price: number;
+  symbol: string;
 };
 
 export function PriceTableSection() {
@@ -48,12 +49,14 @@ export function PriceTableSection() {
           price: gold18k!.price,
           changeRate: gold18k!.change_percent,
           icon: "/icons/gold18.png",
+          symbol: "تومان",
         },
         {
           title: coin!.name,
           price: coin!.price,
           changeRate: coin!.change_percent,
           icon: "/icons/coin.png",
+          symbol: "تومان",
         },
 
         //
@@ -62,12 +65,14 @@ export function PriceTableSection() {
           price: dollar!.price,
           changeRate: dollar!.change_percent,
           icon: "/icons/dollar.png",
+          symbol: "تومان",
         },
         {
           title: euro!.name,
           price: euro!.price,
           changeRate: euro!.change_percent,
           icon: "/icons/euro.png",
+          symbol: "تومان",
         },
 
         //
@@ -76,12 +81,14 @@ export function PriceTableSection() {
           price: parseFloat(bitcoin!.price),
           changeRate: bitcoin!.change_percent,
           icon: "/icons/bitcoin.png",
+          symbol: "دلار",
         },
         {
           title: etherium!.name,
           price: parseFloat(etherium!.price),
           changeRate: etherium!.change_percent,
           icon: "/icons/eth.png",
+          symbol: "دلار",
         },
       ];
 
@@ -103,6 +110,7 @@ export function PriceTableSection() {
                 changeRate={item.changeRate}
                 price={item.price}
                 icon={item.icon}
+                symbol={item.symbol}
               />
             );
           })}
@@ -136,7 +144,7 @@ function PriceItem(props: PriceItemProps) {
           <span className="text-sm mx-2">
             {Number(props.price).toLocaleString("fa-IR")}
           </span>
-          <span className={"font-thin text-xs"}> تومان </span>
+          <span className={"font-thin text-xs"}> {props.symbol} </span>
         </p>
       </div>
     </div>

@@ -11,7 +11,6 @@ import {
 import { useShallow } from "zustand/react/shallow";
 import { useState } from "react";
 import { Modal } from "@/components/modal.tsx";
-import { CreateTodoModal } from "@/features/tolo-list/create-todo-modal.tsx";
 import { Controller, useForm } from "react-hook-form";
 import { UpdateTodoModal } from "./update-todo-modal";
 
@@ -36,7 +35,6 @@ export function TodoListSection() {
   );
   // const [isCreateTodoModalOpen, setIsCreateTodoModalOpen] = useState(false);
   const [isCreateTodoFieldOpen, setIsCreateTodoFieldOpen] = useState(false);
-  const [taskTitle, setTaskTitle] = useState("");
   const [selectedTodoTag, setSelectedTodoTag] = useState<TagType>("urgent");
 
   const [selectedTodo, setSelectedTodo] = useState<TodoItem | null>();
@@ -124,7 +122,7 @@ export function TodoListSection() {
           </div>
         </GlassContainer>
 
-        <div className="grow flex flex-col items-stretch justify-start gap-2 overflow-y-scroll">
+        <div className="grow flex flex-col items-stretch justify-start gap-2 overflow-y-scroll no-scrollbar ">
           {sorter(todos, selectedSortFilter).map((todo) => {
             return (
               <GlassContainer
@@ -293,7 +291,7 @@ export function TodoListSection() {
                       // setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen);
                       const { title, description } = form.getValues();
 
-                      if (title) {
+                      if (title.trim()) {
                         createTodo(
                           title,
                           description,
@@ -316,24 +314,26 @@ export function TodoListSection() {
           <>
             <GlassContainer
               className={`bg-white-20 flex items-center justify-between p-2 rounded-xl h-14`}
+              onClick={() => setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen)}
             >
               {/*<p className="text-lg font-bold">نوشتن کار جدید</p>*/}
-              <form
+              <div
                 onSubmit={(e) => {
                   e.preventDefault();
                   // setIsCreateTodoModalOpen(true);
                 }}
-                onClick={() => setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen)}
+                // onClick={() => setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen)}
               >
-                <input
+                <p>نوشتن تسک جدید</p>
+                {/* <input
                   className={"border-0 w-full outline-0"}
                   placeholder={"نوشتن کار جدید"}
                   onChange={(e) => setTaskTitle(e.target.value)}
                   value={taskTitle}
                   disabled
                 />
-                <input type="submit" className="hidden" />
-              </form>
+                <input type="submit" className="hidden" /> */}
+              </div>
 
               <div className="h-10 w-10 bg-blue-600 rounded-2xl flex justify-center items-center">
                 <IconPlus
@@ -341,7 +341,7 @@ export function TodoListSection() {
                   size={20}
                   onClick={() => {
                     // setIsCreateTodoModalOpen(true)
-                    setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen);
+                    // setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen);
                   }}
                 />
               </div>

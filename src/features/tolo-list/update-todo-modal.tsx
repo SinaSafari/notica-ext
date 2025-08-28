@@ -16,7 +16,7 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
   );
   const [selectedTag, setSelectedTag] = useState<TagType>(props.todo.tag);
 
-  const { createTodo, updateTodo, deleteTodo } = useAppState(
+  const { updateTodo, deleteTodo } = useAppState(
     useShallow((state) => {
       return {
         createTodo: state.createTodo,
@@ -95,45 +95,6 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
                 }`}
                 onClick={() => setSelectedTag("not-force")}
               ></div>
-              {/* <div
-                onClick={() => setSelectedTag("urgent")}
-                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
-                  selectedTag === "urgent"
-                    ? "border-blue-500"
-                    : "border-gray-300"
-                }`}
-              >
-                <div className="rounded-full bg-red-500 h-4 w-4"></div>
-                <div className="flex-1">
-                  <p className="text-sm">فوری</p>
-                </div>
-              </div> */}
-              {/* <div
-                onClick={() => setSelectedTag("moderate")}
-                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
-                  selectedTag === "moderate"
-                    ? "border-blue-500"
-                    : "border-gray-300"
-                }`}
-              >
-                <div className="rounded-full bg-yellow-500 h-4 w-4"></div>
-                <div className="flex-1">
-                  <p className="text-sm">مهم</p>
-                </div>
-              </div> */}
-              {/* <div
-                onClick={() => setSelectedTag("not-force")}
-                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
-                  selectedTag === "not-force"
-                    ? "border-blue-500"
-                    : "border-gray-300"
-                }`}
-              >
-                <div className="rounded-full bg-green-600 h-4 w-4"></div>
-                <div className="flex-1">
-                  <p className="text-sm">اگر شد</p>
-                </div>
-              </div> */}
             </div>
           </div>
 
@@ -155,7 +116,7 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
                 "bg-blue-600 rounded-xl text-white px-10 py-2 cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed"
               }
               onClick={() => {
-                if (taskTitle) {
+                if (taskTitle.trim()) {
                   updateTodo(
                     props.todo.id,
                     taskTitle,
