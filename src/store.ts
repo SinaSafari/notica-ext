@@ -111,14 +111,9 @@ export const useAppState = create<AppState>()(
         const alreadyRegistered = chores.findIndex((i) => i.icon === data.icon);
 
         if (alreadyRegistered >= 0) {
-          console.log("alreadyRegistered", alreadyRegistered);
-
           chores[alreadyRegistered] = data;
-          set({ chores: chores });
+          set({ chores: [...chores] });
         } else {
-          const x = [...chores, data];
-          console.log({ x });
-
           set({ chores: [...chores, data] });
         }
 

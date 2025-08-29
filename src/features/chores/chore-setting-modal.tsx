@@ -57,6 +57,8 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
     })
   );
 
+  console.log({ chores });
+
   const [selectedChore, setSelectedChore] = useState<string>(() => {
     return chores.at(0)?.icon || "/chore/Brake.svg";
   });

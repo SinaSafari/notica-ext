@@ -12,108 +12,7 @@ import { useState } from "react";
 import { Modal } from "@/components/modal";
 import { AddBookmarkModal } from "./add-bookmark-modal";
 import useFavicon from "./use-favicon";
-
-const linocaLinks: Array<BookMark> = [
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.digikala.com",
-    title: "دیجیکالا",
-    favicon: "",
-  },
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.alibaba.ir/",
-    title: "علی‌بابا",
-    favicon: "",
-  },
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.varzesh3.ir/",
-    title: "ورزش ۳",
-    favicon: "",
-  },
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.bbc.com/persian",
-    title: "bbc",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://ir.voanews.com/",
-    title: "voa",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.fifa.com/en",
-    title: "fifa",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.filimo.com/",
-    title: "فیلیمو",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.netflix.com/gb/",
-    title: "نتفلیکس",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://www.spotify.com/",
-    title: "سپتیفای",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://780.ir/",
-    title: "۷۸۰",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://blubank.sb24.ir/",
-    title: "بلوبانک",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://chatgpt.com/",
-    title: "چت جی‌پی‌تی",
-    favicon: "",
-  },
-
-  {
-    id: crypto.randomUUID(),
-    link: "https://claude.ai/",
-    title: "کلاد",
-    favicon: "",
-  },
-  {
-    id: crypto.randomUUID(),
-    link: "https://mail.google.com/",
-    title: "جیمیل",
-    favicon: "",
-  },
-  {
-    id: crypto.randomUUID(),
-    link: "https://outlook.live.com/",
-    title: "اوتلوک",
-    favicon: "",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
 
 export function LinocaSection() {
   const { toggleLinocaShown, bookmarks, removeBookmark, linocaShown } =
@@ -128,7 +27,14 @@ export function LinocaSection() {
       })
     );
 
-  console.log("linoca links", { linocaShown, linocaLinks });
+  const { data } = useQuery({
+    queryKey: ["linoca:link"],
+    queryFn: async () => {
+      const res = await fetch("https://notica.app/api/ext/linoca/v1/list");
+      const data = await res.json();
+      return data.data as Array<BookMark>;
+    },
+  });
 
   const [isAddBookmarkOpen, setIsAddBookmarkOpen] = useState(false);
 
@@ -152,17 +58,18 @@ export function LinocaSection() {
 
         {linocaShown ? (
           <>
-            {linocaLinks.map((i) => {
-              return (
-                <IconContainer
-                  id={i.id}
-                  link={i.link}
-                  onRemove={() => removeBookmark(i.id)}
-                  title={i.title}
-                  removable={false}
-                />
-              );
-            })}
+            {data &&
+              data.map((i) => {
+                return (
+                  <IconContainer
+                    id={i.id}
+                    link={i.link}
+                    onRemove={() => removeBookmark(i.id)}
+                    title={i.title}
+                    removable={false}
+                  />
+                );
+              })}
           </>
         ) : bookmarks.length === 0 ? (
           <>

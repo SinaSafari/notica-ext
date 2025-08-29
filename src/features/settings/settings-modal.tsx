@@ -144,17 +144,6 @@ export function SettingsModal(props: SettingsModalProps) {
                 <p className={"text-sm"}>
                   در اینجا میتوانید اطلاعات کاربری خود را تغییر دهید.
                 </p>
-                <label htmlFor={"password"} className={"text-right text-xs"}>
-                  نام کاربری
-                </label>
-                <input
-                  type={"password"}
-                  name={"password"}
-                  className={
-                    "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                  }
-                  placeholder={"نام کاربری"}
-                />
 
                 <div className={"flex justify-between items-center gap-2"}>
                   <div className={"w-full flex-1"}>
@@ -207,35 +196,65 @@ export function SettingsModal(props: SettingsModalProps) {
                 </label>
                 <div className={"flex justify-between items-center gap-2"}>
                   <div className={"w-full flex-1"}>
-                    <input
-                      type={"password"}
-                      name={"password"}
-                      className={
-                        "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                      }
-                      placeholder={"روز"}
-                    />
+                    <label className="text-sm">روز</label>
+                    <select className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1">
+                      {Array.from({ length: 31 - 1 + 1 }, (_, i) => 1 + i).map(
+                        (i) => {
+                          return <option>{i}</option>;
+                        }
+                      )}
+                    </select>
                   </div>
                   <div className={"w-full flex-1"}>
-                    <input
-                      type={"password"}
-                      name={"password"}
-                      className={
-                        "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                      }
-                      placeholder={"ماه"}
-                    />
+                    <label className="text-sm">ماه</label>
+                    <select className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1">
+                      {[
+                        "فروردین",
+                        "اردیبهشت",
+                        "خرداد",
+                        "تیر",
+                        "مرداد",
+                        "شهریور",
+                        "مهر",
+                        "آبان",
+                        "آذر",
+                        "دی",
+                        "بهمن",
+                        "اسفند",
+                      ].map((i) => {
+                        return <option value={i}>{i}</option>;
+                      })}
+                      {/* {Array.from(
+                        { length: 1404 - 1300 + 1 },
+                        (_, i) => 1300 + i
+                      ).map((i) => {
+                        return <option>{i}</option>;
+                      })} */}
+                    </select>
                   </div>
                   <div className={"w-full flex-1"}>
-                    <input
-                      type={"password"}
-                      name={"password"}
-                      className={
-                        "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
-                      }
-                      placeholder={"سال"}
-                    />
+                    <label className="text-sm">سال</label>
+                    <select className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1">
+                      {Array.from(
+                        { length: 1404 - 1300 + 1 },
+                        (_, i) => 1300 + i
+                      )
+                        .reverse()
+                        .map((i) => {
+                          return <option>{i}</option>;
+                        })}
+                    </select>
                   </div>
+                </div>
+                <div
+                  className="bg-[#DB4437] px-4 py-2 text-white rounded-xl flex items-center justify-center gap-2 flex-row-reverse"
+                  onClick={() => {
+                    //@ts-ignore
+                    chrome.identity.clearAllCachedAuthTokens();
+                  }}
+                >
+                  <IconBrandGoogle />
+                  <span>اتصال گوگل به نوتیکا</span>
                 </div>
               </div>
               <div className={"max-h-[52px] flex flex-row-reverse"}>

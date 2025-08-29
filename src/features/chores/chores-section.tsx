@@ -4,6 +4,22 @@ import { IconPlus } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useShallow } from "zustand/shallow";
 
+import { BrakeSvg } from "./icons/brake-svg";
+import { BreakfastSvg } from "./icons/breakfast-svg";
+import { CoffeeSvg } from "./icons/coffee-svg";
+import { FoodSvg } from "./icons/food-svg";
+import { PillSvg } from "./icons/pill-svg";
+import { SmookingSvg } from "./icons/smooking-svg";
+
+const choreIconMapper = {
+  "/chore/Brake.svg": BrakeSvg,
+  "/chore/Breakfast.svg": BreakfastSvg,
+  "/chore/Coffee.svg": CoffeeSvg,
+  "/chore/Food.svg": FoodSvg,
+  "/chore/Pill.svg": PillSvg,
+  "/chore/Smooking.svg": SmookingSvg,
+};
+
 type ChoresSection = {
   isChoreModalOpen: boolean;
   setIsChoreModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -71,23 +87,58 @@ export function ChoresSection({
     return () => clearInterval(choresInterval);
   }, []);
 
+  console.log({ currentChores });
+
   return (
     <>
       <div className="h-full w-full flex items-center gap-2 justify-between flex-nowrap">
         {currentChores.map((c) => {
           if (c.icon) {
-            return (
-              <GlassContainer
-                className={`w-[53px] h-[56px] rounded-2xl flex items-center justify-center ${
-                  activeChores.includes(c.icon)
-                    ? "ring-4 ring-blue-600"
-                    : "ring-4 ring-transparent"
-                }`}
-                onClick={() => setIsChoreModalOpen(true)}
-              >
-                <img src={c.icon} className="w-6 h-6" />
-              </GlassContainer>
-            );
+            if (activeChores.includes(c.icon)) {
+              return (
+                <div className="relative flex justify-center items-center">
+                  <div className="absolute">
+                    <div className="flex w-[53px] h-[53px] justify-center items-center relative">
+                      <div className="w-[110%] h-[110%] shadow-sm shadow-pink-500 bg-transparent rounded-2xl absolute "></div>
+                      <div className="w-[108%] h-[108%] shadow-sm shadow-violet-500 bg-transparent rounded-2xl absolute rotate-90"></div>
+                      <div className="w-[106%] h-[106%] shadow-sm shadow-cyan-500 bg-transparent rounded-2xl absolute rotate-180"></div>
+                    </div>
+                  </div>
+
+                  <GlassContainer
+                    className={`w-[53px] h-[56px] rounded-2xl flex items-center justify-center `}
+                    onClick={() => setIsChoreModalOpen(true)}
+                  >
+                    <img src={c.icon} className="w-6 h-6" />
+                  </GlassContainer>
+                </div>
+              );
+              // return (
+              //   <GlassContainer
+              //     className={`w-[53px] h-[56px] rounded-2xl flex items-center justify-center ${
+              //       activeChores.includes(c.icon)
+              //         ? "ring-4 ring-blue-600"
+              //         : "ring-4 ring-transparent"
+              //     }`}
+              //     onClick={() => setIsChoreModalOpen(true)}
+              //   >
+              //     <img src={c.icon} className="w-6 h-6" />
+              //   </GlassContainer>
+              // );
+            } else {
+              return (
+                <GlassContainer
+                  className={`w-[53px] h-[56px] rounded-2xl flex items-center justify-center ${
+                    activeChores.includes(c.icon)
+                      ? "ring-4 ring-blue-600"
+                      : "ring-4 ring-transparent"
+                  }`}
+                  onClick={() => setIsChoreModalOpen(true)}
+                >
+                  <img src={c.icon} className="w-6 h-6" />
+                </GlassContainer>
+              );
+            }
           }
 
           return (
