@@ -75,14 +75,13 @@ export function TodoListSection() {
         />
       </Modal>
 
-      <GlassContainer className="flex flex-col justify-between items-stretch h-full gap-4 w-full">
-        <GlassContainer className="bg-white-20 flex items-center justify-between  h-[50px]">
+      <GlassContainer className="flex p-3 flex-col justify-between items-stretch h-full gap-4 w-full">
+        <GlassContainer className="bg-white-20 flex items-center justify-between h-[50px]">
           <p className="text-lg font-bold">کارهای امروز</p>
-          <div className="flex justify-end items-center gap-2">
+          <div className="flex justify-end items-center gap-1">
             <div
-              className={`h-[10px] w-[10px] bg-red-500 rounded-full ${
-                selectedSortFilter === "urgent" ? "ring-1 to-blue-600" : ""
-              }`}
+              className={`h-3 w-3 bg-red-500 rounded-full hover:bg-red-600 ${selectedSortFilter === "urgent" ? "ring-1 to-blue-600" : ""
+                }`}
               onClick={(e) => {
                 e.preventDefault();
                 if (selectedSortFilter === "urgent") {
@@ -93,9 +92,8 @@ export function TodoListSection() {
               }}
             ></div>
             <div
-              className={`h-[10px] w-[10px] bg-green-500 rounded-full ${
-                selectedSortFilter === "not-force" ? "ring-1 to-blue-600" : ""
-              }`}
+              className={`h-3 w-3 bg-green-500 rounded-full hover:bg-green-600 ${selectedSortFilter === "not-force" ? "ring-1 to-blue-600" : ""
+                }`}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -107,9 +105,8 @@ export function TodoListSection() {
               }}
             ></div>
             <div
-              className={`h-[10px] w-[10px] bg-yellow-300 rounded-full  ${
-                selectedSortFilter === "moderate" ? "ring-1 to-blue-600" : ""
-              }`}
+              className={`h-3 w-3 bg-yellow-500 rounded-full hover:bg-yellow-600 ${selectedSortFilter === "moderate" ? "ring-1 to-blue-600" : ""
+                }`}
               onClick={(e) => {
                 e.preventDefault();
                 if (selectedSortFilter === "moderate") {
@@ -127,9 +124,8 @@ export function TodoListSection() {
             return (
               <GlassContainer
                 key={todo.id.toString()}
-                className={`flex justify-between items-stretch gap-4 rounded-xl  ${
-                  todo.status === "done" ? "bg-white/5" : ""
-                }`}
+                className={`flex justify-between items-stretch gap-4 rounded-xl hover:bg-white  ${todo.status === "done" ? "bg-white/5" : ""
+                  }`}
               >
                 <div className="h-full w-4 flex flex-col justify-around items-center gap-4">
                   <input
@@ -145,15 +141,14 @@ export function TodoListSection() {
                   />
                   {todo.tag !== null || todo.tag !== "" ? (
                     <div
-                      className={`h-3 w-3 ${
-                        todo.tag === "urgent"
-                          ? "bg-red-500"
-                          : todo.tag === "moderate"
+                      className={`h-3 w-3 ${todo.tag === "urgent"
+                        ? "bg-red-500 "
+                        : todo.tag === "moderate"
                           ? "bg-yellow-500"
                           : todo.tag === "not-force"
-                          ? "bg-green-500"
-                          : "bg-transparent"
-                      } rounded-xl text-center`}
+                            ? "bg-green-500"
+                            : "bg-transparent"
+                        } rounded-xl text-center`}
                     ></div>
                   ) : null}
                 </div>
@@ -168,21 +163,19 @@ export function TodoListSection() {
                 >
                   <div className="flex justify-between items-center">
                     <p
-                      className={`text-sm font-bold overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis ${
-                        todo.status === "done" ? "text-black/10" : ""
-                      }`}
+                      className={`text-sm font-bold overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis ${todo.status === "done" ? "text-black/10" : ""
+                        }`}
                     >
                       {todo.title}
                     </p>
 
-                    <div className="flex justify-end items-center gap-2">
+                    <div className="flex justify-end items-center gap-1">
                       <IconCalendar size={16} color="gray" />
                       <p
-                        className={`text-xs  ${
-                          todo.status === "done"
-                            ? "text-black/10"
-                            : "text-gray-500"
-                        }`}
+                        className={`text-xs  ${todo.status === "done"
+                          ? "text-black/10"
+                          : "text-gray-500"
+                          }`}
                       >
                         {todo.createdAt ? (
                           <>{formatDate(new Date(todo.createdAt))}</>
@@ -193,9 +186,8 @@ export function TodoListSection() {
                     </div>
                   </div>
                   <p
-                    className={`text-sm  overflow-x-hidden max-w-[200px] whitespace-nowrap overflow-ellipsis ${
-                      todo.status === "done" ? "text-black/10" : "text-gray-500"
-                    }`}
+                    className={`text-sm  overflow-x-hidden max-w-[200px] whitespace-nowrap overflow-ellipsis ${todo.status === "done" ? "text-black/10" : "text-gray-500"
+                      }`}
                   >
                     {todo.description}
                   </p>
@@ -208,9 +200,9 @@ export function TodoListSection() {
         {isCreateTodoFieldOpen ? (
           <>
             <GlassContainer
-              className={`bg-white-20 flex-col flex items-strech justify-between p-2 rounded-xl h-50`}
+              className={`bg-white-20 flex-col flex items-strech p-3 rounded-3xl`}
             >
-              <GlassContainer className="my-2 p-2 text-xs rounded-2xl">
+              <GlassContainer className="my-2 p-2 text-xs rounded-lg">
                 <Controller
                   control={form.control}
                   name="title"
@@ -228,7 +220,7 @@ export function TodoListSection() {
                 />
               </GlassContainer>
 
-              <GlassContainer className="my-2 p-2 rounded-2xl text-xs">
+              <GlassContainer className="my-2 rounded-xl text-xs">
                 <Controller
                   control={form.control}
                   name="description"
@@ -249,39 +241,35 @@ export function TodoListSection() {
 
               <div className="flex justify-end items-stretch gap-2">
                 <div className="flex flex-col justify-end">
-                  <div className="flex items-center justify-start gap-2">
+                  <div className="flex items-center justify-start gap-1">
                     <div
-                      className={`h-4 w-4 bg-red-500 rounded-full border ${
-                        selectedTodoTag === "urgent"
-                          ? "border-blue-600"
-                          : "border-transparent"
-                      }`}
+                      className={`h-4 w-4 bg-red-500 hover:bg-red-600 rounded-full border ${selectedTodoTag === "urgent"
+                        ? "border-blue-600"
+                        : "border-transparent"
+                        }`}
                       onClick={() => setSelectedTodoTag("urgent")}
                     ></div>
                     <div
-                      className={`h-4 w-4 bg-yellow-500 rounded-full border ${
-                        selectedTodoTag === "moderate"
-                          ? "border-blue-600"
-                          : "border-transparent"
-                      }`}
+                      className={`h-4 w-4 bg-yellow-500 hover:bg-yellow-600 rounded-full border ${selectedTodoTag === "moderate"
+                        ? "border-blue-600"
+                        : "border-transparent"
+                        }`}
                       onClick={() => setSelectedTodoTag("moderate")}
                     ></div>
                     <div
-                      className={`h-4 w-4 bg-green-500 rounded-full border ${
-                        selectedTodoTag === "not-force"
-                          ? "border-blue-600"
-                          : "border-transparent"
-                      }`}
+                      className={`h-4 w-4 bg-green-500 hover:bg-green-600 rounded-full border ${selectedTodoTag === "not-force"
+                        ? "border-blue-600"
+                        : "border-transparent"
+                        }`}
                       onClick={() => setSelectedTodoTag("not-force")}
                     ></div>
                   </div>
                 </div>
                 <div
-                  className={`h-10 w-10 rounded-2xl flex justify-center items-center ${
-                    form.getValues().title === ""
-                      ? "bg-gray-400 "
-                      : "bg-blue-600 "
-                  }`}
+                  className={`h-10 w-10 rounded-4xl flex justify-center items-center ${form.getValues().title === ""
+                    ? "bg-gray-400 "
+                    : "bg-blue-600 "
+                    }`}
                 >
                   <IconPlus
                     color="white"
@@ -313,7 +301,7 @@ export function TodoListSection() {
         ) : (
           <>
             <GlassContainer
-              className={`bg-white-20 flex items-center justify-between p-2 rounded-xl h-14`}
+              className={`bg-white-20 flex items-center justify-between p-2 rounded-4xl h-14`}
               onClick={() => setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen)}
             >
               {/*<p className="text-lg font-bold">نوشتن کار جدید</p>*/}
@@ -322,7 +310,7 @@ export function TodoListSection() {
                   e.preventDefault();
                   // setIsCreateTodoModalOpen(true);
                 }}
-                // onClick={() => setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen)}
+              // onClick={() => setIsCreateTodoFieldOpen(!isCreateTodoFieldOpen)}
               >
                 <p>نوشتن تسک جدید</p>
                 {/* <input
@@ -335,7 +323,7 @@ export function TodoListSection() {
                 <input type="submit" className="hidden" /> */}
               </div>
 
-              <div className="h-10 w-10 bg-blue-600 rounded-2xl flex justify-center items-center">
+              <div className="h-10 w-10 bg-blue-600 rounded-4xl flex justify-center items-center hover:bg-blue-700">
                 <IconPlus
                   color="white"
                   size={20}

@@ -86,7 +86,7 @@ export function MainPage() {
         style={{ "--bg-image": `url(${selectedBg})` }}
         className={`h-screen w-screen grid place-items-center bg-[image:var(--bg-image)] bg-cover bg-center`}
       >
-        <div className="max-w-[1536px] h-[876px]  flex flex-col items-stretch gap-4 w-full">
+        <div className="max-w-[1536px] h-[850px]  flex flex-col items-stretch gap-4 w-full">
           {/* profile start */}
           <div className="flex w-full justify-between items-center h-20  ">
             <div className="flex items-center justify-start flex-row-reverse">
@@ -136,7 +136,7 @@ export function MainPage() {
               >
                 {isGoogleLoginPending ? (
                   <>
-                    <IconLoader2 />
+                    <IconLoader2 className="animate-spin" />
                   </>
                 ) : (
                   <IconBrandGoogle />
@@ -161,35 +161,28 @@ export function MainPage() {
           {/* google search start */}
 
           <div className="flex w-full justify-between items-center gap-3 ">
-            <GlassContainer className="w-full h-20">
+            <GlassContainer className="w-full h-[56px] pl-1">
               <GoogleSearchSection />
             </GlassContainer>
-            <GlassContainer className="max-w-[384px] h-20">
+            <div className="max-w-[384px] h-[56px]">
               <ChoresSection
                 isChoreModalOpen={isChoreModalOpen}
                 setIsChoreModalOpen={setIsChoreModalOpen}
               />
-            </GlassContainer>
+            </div>
           </div>
-          {/* google search  end */}
-
-          {/* <div className="flex w-full justify-between items-center h-24  rounded-4xl  bg-white/50 shadow-lg ring-1 ring-black/20  border border-slate-300 backdrop-blur-sm">
-          <div>hi</div>
-          <div>bye</div>
-        </div> */}
-
           <LinocaSection />
 
-          <div className="flex flex-row justify-between items-stretch gap-2 grow max-h-[550px] w-full">
-            <div className="  flex flex-col justify-between items-stretch gap-4 w-[375px]">
+          <div className="flex flex-row justify-between items-stretch gap-3 grow max-h-[530px] w-full">
+            <div className="  flex flex-col justify-between items-stretch gap-3 w-[375px]">
               <TodoListSection />
             </div>
 
-            <div className="  flex flex-col justify-between items-stretch gap-4 w-[375px]">
+            <div className="  flex flex-col justify-between items-stretch gap-3 w-[375px]">
               <AdsSection />
             </div>
 
-            <div className="  flex flex-col justify-between items-stretch gap-4 w-[375px]">
+            <div className="  flex flex-col justify-between items-stretch gap-3 w-[375px]">
               {linocaShown ? (
                 <AdsSection />
               ) : (
@@ -203,7 +196,7 @@ export function MainPage() {
               )}
             </div>
 
-            <div className="flex flex-col justify-between items-stretch gap-4 w-[375px]">
+            <div className="flex flex-col justify-between items-stretch gap-3 w-[375px]">
               <GoogleEventsSection />
               <GoogleCalendarSection
                 isNewEventModalOpen={isNewEventModalOpen}

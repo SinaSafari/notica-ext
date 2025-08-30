@@ -36,10 +36,10 @@ export function AdsSection() {
           src={
             data?.find((i: { position: string }) => i.position === "1")
               ? data.find((i: { position: string }) => i.position === "1")
-                  ?.image
+                ?.image
               : "/ads-1.png"
           }
-          className={`w-full h-full object-cover rounded-2xl`}
+          className={`w-full h-full object-cover rounded-4xl`}
           alt={"ads 1"}
         />
       </GlassContainer>
@@ -48,10 +48,10 @@ export function AdsSection() {
           src={
             data?.find((i: { position: string }) => i.position === "2")
               ? data.find((i: { position: string }) => i.position === "2")
-                  ?.image
+                ?.image
               : "/ads-1.png"
           }
-          className={`w-full h-full object-cover rounded-2xl`}
+          className={`w-full h-full object-cover rounded-4xl`}
           alt={"ads 1"}
         />
       </GlassContainer>

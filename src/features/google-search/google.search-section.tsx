@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { IconSearch } from "@tabler/icons-react"
 
 export function GoogleSearchSection() {
   const [searchText, setSeatchText] = useState("");
@@ -31,7 +32,7 @@ export function GoogleSearchSection() {
         </form>
       </div>
       <button
-        className={"h-[44px] w-[116px] bg-blue-600 rounded-xl text-white"}
+        className={"h-[48px] w-[48px] bg-blue-600 hover:bg-blue-700 rounded-full text-white flex items-center justify-center"}
         onClick={(e) => {
           e.preventDefault();
           window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
@@ -39,7 +40,7 @@ export function GoogleSearchSection() {
           )}`;
         }}
       >
-        جستجو کن
+        <IconSearch stroke={2} />
       </button>
     </div>
 

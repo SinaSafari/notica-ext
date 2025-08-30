@@ -98,18 +98,18 @@ export function LoginModal(props: LoginModal) {
               />
               <button
                 className={
-                  "rounded-xl py-2 cursor-pointer bg-blue-600 text-white"
+                  "rounded-xl py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white"
                 }
                 onClick={() => {
                   setPage("register:verify");
                 }}
               >
-                ورود به نوتیکا
+                ثبت نام در نوتیکا
               </button>
               <p className={"text-xs text-center"}>
                 <span>ثبت نام کردید؟</span>
                 <span
-                  className={"underline text-blue-600 cursor-pointer mx-1"}
+                  className={"underline text-blue-600  cursor-pointer mx-1"}
                   onClick={() => setPage("login")}
                 >
                   {" "}
@@ -136,7 +136,7 @@ export function LoginModal(props: LoginModal) {
               />
               <button
                 className={
-                  "rounded-xl py-2 cursor-pointer bg-blue-600 text-white"
+                  "rounded-xl py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white"
                 }
                 onClick={() => {
                   setPage("register:info");
@@ -196,7 +196,7 @@ export function LoginModal(props: LoginModal) {
 
               <button
                 className={
-                  "rounded-xl py-2 cursor-pointer bg-blue-600 text-white"
+                  "rounded-xl py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white"
                 }
                 onClick={() => {
                   props.onClose();

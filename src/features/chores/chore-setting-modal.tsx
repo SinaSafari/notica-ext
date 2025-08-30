@@ -77,15 +77,14 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
           <p className="text-xl "> مدیریت کارهای روزانه</p>
 
           <div className="flex-1">
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               {defaultChores.map((c) => {
                 return (
                   <GlassContainer
-                    className={`w-[53px] h-[56px] rounded-2xl flex items-center justify-center border  ${
-                      c.icon === selectedChore
-                        ? "border-blue-600 border-2"
-                        : "border-slate-400"
-                    }`}
+                    className={`w-[56px] h-[56px] rounded-4xl flex items-center justify-center border  ${c.icon === selectedChore
+                      ? "border-blue-600 border-2"
+                      : "border-slate-400"
+                      }`}
                     onClick={() => {
                       setSelectedChore(c.icon);
                     }}
@@ -108,9 +107,8 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
               return (
                 <>
                   <div
-                    className={`flex items-center justify-between w-full gap-4 ${
-                      c.icon === selectedChore ? "" : "hidden"
-                    }`}
+                    className={`flex items-center justify-between w-full gap-4 ${c.icon === selectedChore ? "" : "hidden"
+                      }`}
                   >
                     <div className="flex-1">
                       <label>ساعت</label>
@@ -155,12 +153,11 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
                   </div>
 
                   <div
-                    className={`flex justify-end items-center w-full my-4 ${
-                      c.icon === selectedChore ? "" : "hidden"
-                    }`}
+                    className={`flex justify-end items-center w-full my-4 ${c.icon === selectedChore ? "" : "hidden"
+                      }`}
                   >
                     <button
-                      className="p-2 bg-red-500 text-white rounded-xl"
+                      className="bg-red-600 hover:bg-red-700 text-white rounded-4xl px-4 py-2"
                       onClick={() => {
                         deleteChore(ch.icon);
                         onClose();
@@ -176,7 +173,7 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
 
           <div className={"max-h-[52px] flex flex-row-reverse"}>
             <button
-              className={"bg-blue-600 rounded-xl text-white px-10 py-2"}
+              className={"bg-blue-600 hover:bg-blue-700 rounded-4xl text-white px-10 py-2"}
               onClick={() => {
                 onClose();
               }}

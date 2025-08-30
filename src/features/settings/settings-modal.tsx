@@ -14,18 +14,13 @@ import { IconBrandGoogle } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 
 const weatherCities: Array<WeatherCity> = [
-  {
-    name: "tehran",
-    title: "تهران",
-    lat: 35.69439,
-    lng: 51.42151,
-  },
-  {
-    name: "tabriz",
-    title: "تبریز",
-    lat: 38.0792,
-    lng: 46.2887,
-  },
+  { name: "tehran", title: "تهران", lat: 35.715298, lng: 51.404343 },
+  { name: "shiraz", title: "شیراز", lat: 29.591768, lng: 52.583698 },
+  { name: "gorgan", title: "گرگان", lat: 36.841644, lng: 54.432922 },
+  { name: "qom", title: "قم", lat: 34.639999, lng: 50.876389 },
+  { name: "tabriz", title: "تبریز", lat: 38.066666, lng: 46.299999 },
+  { name: "ahvaz", title: "اهواز", lat: 31.318327, lng: 48.670620 },
+  { name: "kerman", title: "کرمان", lat: 30.29, lng: 57.06 },
 ];
 
 type SettingsModalProps = {
@@ -60,11 +55,10 @@ export function SettingsModal(props: SettingsModalProps) {
         >
           <div className={"flex-1 flex flex-col items-stretch gap-2 p-4"}>
             <div
-              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${
-                activeTab === "account"
+              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "account"
                   ? "text-white bg-blue-600 rounded-lg p-1"
                   : ""
-              }`}
+                }`}
               onClick={() => setActiveTab("account")}
             >
               <div className={"max-w-[16px]"}>
@@ -73,11 +67,10 @@ export function SettingsModal(props: SettingsModalProps) {
               <p className={"flex-1 text-right"}>حساب کاربری</p>
             </div>
             <div
-              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${
-                activeTab === "background"
+              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "background"
                   ? "text-white bg-blue-600 rounded-lg p-1"
                   : ""
-              }`}
+                }`}
               onClick={() => setActiveTab("background")}
             >
               <div className={"max-w-[16px]"}>
@@ -86,11 +79,10 @@ export function SettingsModal(props: SettingsModalProps) {
               <p className={"flex-1 text-right"}>تصویر پس زمینه</p>
             </div>
             <div
-              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${
-                activeTab === "general_settings"
+              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "general_settings"
                   ? "text-white bg-blue-600 rounded-lg p-1"
                   : ""
-              }`}
+                }`}
               onClick={() => setActiveTab("general_settings")}
             >
               <div className={"max-w-[16px]"}>
@@ -99,11 +91,10 @@ export function SettingsModal(props: SettingsModalProps) {
               <p className={"flex-1 text-right"}>تنظیمات عمومی</p>
             </div>
             <div
-              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${
-                activeTab === "privacy"
+              className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "privacy"
                   ? "text-white bg-blue-600 rounded-lg "
                   : ""
-              }`}
+                }`}
               onClick={() => setActiveTab("privacy")}
             >
               <div className={"max-w-[16px]"}>

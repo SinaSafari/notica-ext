@@ -15,9 +15,9 @@ export function DailyNotice() {
   });
 
   return (
-    <GlassContainer className="grow flex items-stretch justify-between max-h-[148px] gap-4">
+    <GlassContainer className="grow flex items-stretch justify-between max-h-[120px] gap-3">
       <div className={"w-[85px]  h-full flex items-center justify-center"}>
-        <img src={"/logo.png"} className={"w-[85px] h-[87px]"} alt={"logo"} />
+        <img src={"/notica-video.gif"} className={"w-[100px] h-[100px]"} alt={"logo"} />
       </div>
       {data && data.result.events.length ? (
         <>

@@ -55,7 +55,7 @@ export function AddBookmarkModal(props: AddBookmarkModalProps) {
               className={
                 "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
               }
-              placeholder={"لینک بوکمارک"}
+              placeholder={"لینک بوکمارک (بدون Https)"}
               value={link}
               onChange={(e) => setLink(e.target.value)}
             />
@@ -70,7 +70,7 @@ export function AddBookmarkModal(props: AddBookmarkModalProps) {
             onClick={() => {
               addBookMark({
                 id: crypto.randomUUID(),
-                link: link,
+                link: "https://" + link,
                 title: title,
                 favicon: `${link}/favicon.ico`,
               });

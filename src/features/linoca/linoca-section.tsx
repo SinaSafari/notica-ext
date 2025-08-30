@@ -49,7 +49,7 @@ export function LinocaSection() {
 
       <div className="flex flex-row justify-start gap-3 items-stretch overflow-y-hidden overflow-x-scroll no-scrollbar">
         <GlassContainer
-          className="flex flex-col justify-center items-center w-[85px] h-[85px] bg-white"
+          className="flex flex-col justify-center items-center w-[85px] h-[85px] bg-white gap-1"
           onClick={() => toggleLinocaShown()}
         >
           <IconCategory size={30} color="blue" />
@@ -126,7 +126,7 @@ function IconContainer(props: IconContainer) {
   const { favicon, loading, error } = useFavicon(props.link);
   return (
     <GlassContainer
-      className="flex flex-col justify-center items-center gap-1 w-[85px] h-[85px] bg-white relative"
+      className="flex flex-col justify-center items-center gap-1 w-[85px] h-[85px] bg-white/70 hover:bg-white relative"
       onClick={() => {
         // window.location.href = props.link;
         window.open(props.link, "_blank");
@@ -134,7 +134,7 @@ function IconContainer(props: IconContainer) {
     >
       {props.removable ? (
         <div
-          className="absolute top-0 left-0 w-5 h-5 bg-gray-200 rounded-full m-2 flex items-center justify-center cursor-pointer"
+          className="absolute top-1 left-1 w-5 h-5 bg-gray-300 rounded-full m-2 flex items-center justify-center cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             props.onRemove(props.id);
@@ -148,7 +148,7 @@ function IconContainer(props: IconContainer) {
 
       {loading ? (
         <>
-          <IconLoader2 />
+          <IconLoader2 className="animate-spin" />
         </>
       ) : error ? (
         <>

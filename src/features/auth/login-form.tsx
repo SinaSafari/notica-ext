@@ -29,14 +29,14 @@ export function LoginForm(props: LoginFormProps) {
 
   return (
     <>
-      <p className={"text-center text-xl font-bold"}>به نوتیکا خوش آمدید</p>
+      <p className={"text-right text-xl font-bold"}>به نوتیکا خوش آمدید</p>
       <Controller
         control={control}
         name="email"
         render={({ field }) => {
           return (
             <>
-              <p className={"text-center text-xs"}>
+              <p className={"text-right text-base"}>
                 برای استفاده از نوتیکا ایمیل خود را وارد کنید.
               </p>
               <label htmlFor={"email"} className={"text-right"}>
@@ -93,7 +93,7 @@ export function LoginForm(props: LoginFormProps) {
       </p>
       <button
         className={
-          "rounded-xl py-2 cursor-pointer bg-blue-600 text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+          "rounded-xl py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
         }
         onClick={() => {
           //   props.onClose();
@@ -105,7 +105,7 @@ export function LoginForm(props: LoginFormProps) {
       >
         {props.loading ? (
           <>
-            <IconLoader2 />
+            <IconLoader2 className="animate-spin" />
           </>
         ) : (
           <span>ورود به نوتیکا</span>

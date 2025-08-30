@@ -97,7 +97,7 @@ export function PriceTableSection() {
   });
 
   return (
-    <GlassContainer className="grow flex flex-col items-stretch gap-4 max-h-[240px]">
+    <GlassContainer className="grow flex flex-col items-stretch gap-4 max-h-[240px] p-4">
       <p className={"text-xl font-bold text-right"}>الان چند؟</p>
       <div
         className={"flex flex-col flex-1 items-stretch gap-2 justify-around"}
@@ -128,13 +128,12 @@ function PriceItem(props: PriceItemProps) {
       </div>
 
       <div
-        className={`w-[45px] h-[20px] flex items-center justify-center rounded-lg bg-green-700 text-xs text-white text-center p-2 ${
-          props.changeRate === 0
-            ? "bg-gray-500"
-            : props.changeRate > 0
+        className={`w-[45px] h-[20px] flex items-center justify-center rounded-lg bg-green-700 text-xs text-white text-center p-2 ${props.changeRate === 0
+          ? "bg-gray-500"
+          : props.changeRate > 0
             ? "bg-green-700"
             : "bg-red-700"
-        }  `}
+          }  `}
       >
         <span>{props.changeRate}</span>
         <span>%</span>

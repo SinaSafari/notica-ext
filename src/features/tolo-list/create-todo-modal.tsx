@@ -43,7 +43,7 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
                 type={"text"}
                 name={"title"}
                 className={
-                  "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "text-sm rounded border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"عنوان تسک شما"}
                 value={taskTitle}
@@ -69,11 +69,10 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
             <div className="flex items-stretch gap-4 my-4">
               <div
                 onClick={() => setSelectedTag("urgent")}
-                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
-                  selectedTag === "urgent"
-                    ? "border-blue-500"
-                    : "border-gray-300"
-                }`}
+                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${selectedTag === "urgent"
+                  ? "border-blue-500"
+                  : "border-gray-300"
+                  }`}
               >
                 <div className="rounded-full bg-red-500 h-4 w-4"></div>
                 <div className="flex-1">
@@ -82,11 +81,10 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
               </div>
               <div
                 onClick={() => setSelectedTag("moderate")}
-                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
-                  selectedTag === "moderate"
-                    ? "border-blue-500"
-                    : "border-gray-300"
-                }`}
+                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${selectedTag === "moderate"
+                  ? "border-blue-500"
+                  : "border-gray-300"
+                  }`}
               >
                 <div className="rounded-full bg-yellow-500 h-4 w-4"></div>
                 <div className="flex-1">
@@ -95,11 +93,10 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
               </div>
               <div
                 onClick={() => setSelectedTag("not-force")}
-                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${
-                  selectedTag === "not-force"
-                    ? "border-blue-500"
-                    : "border-gray-300"
-                }`}
+                className={`border  rounded-lg p-3 flex items-center gap-1 cursor-pointer ${selectedTag === "not-force"
+                  ? "border-blue-500"
+                  : "border-gray-300"
+                  }`}
               >
                 <div className="rounded-full bg-green-600 h-4 w-4"></div>
                 <div className="flex-1">

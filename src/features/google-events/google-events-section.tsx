@@ -70,7 +70,7 @@ export function GoogleEventsSection() {
   const [isGoogleLoginPending, setIsGoogleLoginPending] = useState(false);
 
   const { data } = useQuery({
-    queryKey: ["goggle:events"],
+    queryKey: ["google:events"],
     queryFn: async () => {
       const today = new Date();
 
@@ -97,7 +97,7 @@ export function GoogleEventsSection() {
 
       const res = await fetch(
         "https://www.googleapis.com/calendar/v3/calendars/primary/events?" +
-          searchParams.toString(),
+        searchParams.toString(),
         {
           headers: { Authorization: `Bearer ${googleToken}` },
         }
@@ -127,12 +127,12 @@ export function GoogleEventsSection() {
     enabled: !!googleToken,
   });
   return (
-    <GlassContainer className="grow flex items-stretch flex-col max-h-[230px] gap-2 ">
+    <GlassContainer className="grow flex items-stretch flex-col min-h-[145px] max-h-[145px] gap-2 ">
       <p className={"text-lg font-bold"}>امروز چه خبره؟</p>
       {!googleToken && (
         <div className="flex justify-center items-center flex-col">
           <button
-            className="text-white  bg-[#de5246] rounded-lg text-xs cursor-pointer px-3 py-2 flex items-center justify-center gap-3"
+            className="text-white  bg-[#de5246] rounded-lg text-xs cursor-pointer px-3 py-2 flex items-center justify-center gap-3 w-[130px]"
             onClick={(e) => {
               e.preventDefault();
               setIsGoogleLoginPending(true);
@@ -154,7 +154,7 @@ export function GoogleEventsSection() {
           >
             {isGoogleLoginPending ? (
               <>
-                <IconLoader2 />
+                <IconLoader2 className="animate-spin" />
               </>
             ) : (
               <>
@@ -168,11 +168,10 @@ export function GoogleEventsSection() {
       {data?.map((item) => {
         return (
           <div
-            className={`w-full h-[36px] flex items-center justify-between px-4 border-r-4 ${
-              item.status === "incoming"
-                ? "bg-[#EAFFE0] border-r-green-700"
-                : "bg-[#FFE0E1] border-r-red-700"
-            }`}
+            className={`w-full h-[36px] flex items-center justify-between px-4 border-r-4 ${item.status === "incoming"
+              ? "bg-[#EAFFE0] border-r-green-700"
+              : "bg-[#FFE0E1] border-r-red-700"
+              }`}
           >
             <p>{item.title}</p>
             <p>
