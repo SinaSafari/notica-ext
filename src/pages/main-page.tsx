@@ -93,9 +93,9 @@ export function MainPage() {
               <p className="text-4xl text-blue-500 font-bold">نوتیکا</p>
               <img src="/logo.png" className="w-20 h-20" />
             </div>
-            <div className="flex items-center justify-end gap-4">
+            <div className="flex items-center justify-end gap-2">
               <div
-                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center"
+                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center hover:bg-white"
                 onClick={async () => {
                   setIsLoginModalOpen(true);
                   // const res = await fetch(
@@ -116,7 +116,7 @@ export function MainPage() {
               </div>
 
               <div
-                className="w-12 h-12  bg-white/50 backdrop-blur-sm rounded-full grid place-items-center"
+                className="w-12 h-12  bg-white/50 backdrop-blur-sm rounded-full grid place-items-center hover:bg-white"
                 onClick={async () => {
                   setIsGoogleLoginPending(true);
                   //@ts-ignore
@@ -136,7 +136,7 @@ export function MainPage() {
               >
                 {isGoogleLoginPending ? (
                   <>
-                    <IconLoader2 className="animate-spin" />
+                    <IconLoader2 className="animate-spin " />
                   </>
                 ) : (
                   <IconBrandGoogle />
@@ -144,14 +144,14 @@ export function MainPage() {
               </div>
 
               <div
-                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center"
+                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center hover:bg-white"
                 onClick={() => {
                   setIsSettingModalOpen(true);
                 }}
               >
                 <IconSettings />
               </div>
-              <div className="w-12 h-12  bg-white/50 0 backdrop-blur-sm rounded-full grid place-items-center">
+              <div className="w-12 h-12  bg-white/50 0 backdrop-blur-sm rounded-full grid place-items-center hover:bg-red-700 hover:text-white">
                 <IconLogout />
               </div>
             </div>
