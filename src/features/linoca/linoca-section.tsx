@@ -75,7 +75,7 @@ export function LinocaSection() {
           <>
             <>
               <GlassContainer
-                className=" flex items-center justify-center w-[85px] h-[85px]"
+                className=" flex items-center justify-center w-[85px] h-[85px] hover:bg-white"
                 onClick={() => {
                   setIsAddBookmarkOpen(true);
                 }}

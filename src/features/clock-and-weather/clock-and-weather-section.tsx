@@ -158,15 +158,17 @@ export function ClockAndWeatherSection() {
             })}
           </p>
           <div className="flex gap-4 items-center justify-center text-xs w-full">
-            <span className="flex-1 text-left ltr">
+            <span className="flex-1 text-center">
               {new Date().toLocaleDateString("en-GB", {
+                year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
             </span>
             <div className={"w-[1px] h-full bg-slate-300"}></div>
-            <span className="flex-1 text-right">
+            <span className="flex-1">
               {new Date().toLocaleDateString("fa-IR-u-ca-islamic", {
+                year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
