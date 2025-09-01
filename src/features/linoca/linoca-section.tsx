@@ -49,10 +49,10 @@ export function LinocaSection() {
 
       <div className="flex flex-row justify-start gap-3 items-stretch overflow-y-hidden overflow-x-scroll no-scrollbar">
         <GlassContainer
-          className="flex flex-col justify-center items-center w-[85px] h-[85px] bg-white gap-1"
+          className="flex flex-col justify-center items-center w-[85px] h-[85px] bg-white dark:hover:bg-slate-900 gap-1"
           onClick={() => toggleLinocaShown()}
         >
-          <IconCategory size={30} color="blue" />
+          <IconCategory size={30} className="text-blue-600 dark:text-white" />
           <p className="text-xs">لینوکا</p>
         </GlassContainer>
 
@@ -75,7 +75,7 @@ export function LinocaSection() {
           <>
             <>
               <GlassContainer
-                className=" flex items-center justify-center w-[85px] h-[85px] hover:bg-white"
+                className=" flex items-center justify-center w-[85px] h-[85px] hover:bg-white dark:hover:bg-slate-900"
                 onClick={() => {
                   setIsAddBookmarkOpen(true);
                 }}
@@ -100,7 +100,7 @@ export function LinocaSection() {
               })
               .concat(
                 <GlassContainer
-                  className=" flex items-center justify-center w-[85px] h-[85px]"
+                  className=" flex items-center justify-center w-[85px] h-[85px] hover:bg-white dark:hover:bg-slate-900"
                   onClick={() => {
                     setIsAddBookmarkOpen(true);
                   }}
@@ -126,7 +126,7 @@ function IconContainer(props: IconContainer) {
   const { favicon, loading, error } = useFavicon(props.link);
   return (
     <GlassContainer
-      className="flex flex-col justify-center items-center gap-1 w-[85px] h-[85px] bg-white/70 hover:bg-white relative"
+      className="group flex flex-col justify-center items-center gap-1 w-[85px] h-[85px] bg-white/70 hover:bg-white dark:hover:bg-slate-900 relative"
       onClick={() => {
         // window.location.href = props.link;
         window.open(props.link, "_blank");
@@ -134,7 +134,7 @@ function IconContainer(props: IconContainer) {
     >
       {props.removable ? (
         <div
-          className="absolute top-1 left-1 w-5 h-5 bg-gray-300 rounded-full m-2 flex items-center justify-center cursor-pointer"
+          className="absolute top-1 left-1 w-5 h-5 bg-gray-300 rounded-full m-2 flex items-center justify-center cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
           onClick={(e) => {
             e.stopPropagation();
             props.onRemove(props.id);

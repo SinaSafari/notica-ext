@@ -26,6 +26,7 @@ import { useAppState } from "@/store.ts";
 import { useShallow } from "zustand/react/shallow";
 import { CreateGoogleCalendarEvent } from "@/features/google-calendar/create-google-calendar-event";
 import { ChoreSettingModal } from "@/features/chores/chore-setting-modal";
+import { DarkModeToggle } from "@/components/toggle-darkmode.tsx";
 
 export function MainPage() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -95,7 +96,7 @@ export function MainPage() {
             </div>
             <div className="flex items-center justify-end gap-2">
               <div
-                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center hover:bg-white"
+                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center hover:bg-white dark:bg-slate-800 dark:text-white dark:hover:bg-slate-900"
                 onClick={async () => {
                   setIsLoginModalOpen(true);
                   // const res = await fetch(
@@ -116,7 +117,7 @@ export function MainPage() {
               </div>
 
               <div
-                className="w-12 h-12  bg-white/50 backdrop-blur-sm rounded-full grid place-items-center hover:bg-white"
+                className="w-12 h-12  bg-white/50 dark:bg-slate-800 dark:text-white backdrop-blur-sm rounded-full grid place-items-center hover:bg-white dark:hover:bg-slate-900"
                 onClick={async () => {
                   setIsGoogleLoginPending(true);
                   //@ts-ignore
@@ -144,14 +145,17 @@ export function MainPage() {
               </div>
 
               <div
-                className="w-12 h-12  bg-white/50  backdrop-blur-sm rounded-full grid place-items-center hover:bg-white"
+                className="w-12 h-12  bg-white/50 dark:bg-slate-800 dark:text-white backdrop-blur-sm rounded-full grid place-items-center hover:bg-white dark:hover:bg-slate-900"
                 onClick={() => {
                   setIsSettingModalOpen(true);
                 }}
               >
                 <IconSettings />
               </div>
-              <div className="w-12 h-12  bg-white/50 0 backdrop-blur-sm rounded-full grid place-items-center hover:bg-red-700 hover:text-white">
+              <div>
+                <DarkModeToggle />
+              </div>
+              <div className="w-12 h-12 bg-white/50 backdrop-blur-sm rounded-full grid place-items-center hover:bg-red-700 hover:text-white dark:bg-slate-800 dark:text-white">
                 <IconLogout />
               </div>
             </div>

@@ -58,7 +58,7 @@ export function LoginModal(props: LoginModal) {
   return (
     <div
       className={
-        "w-[768px] h-[448px] rounded-xl bg-zinc-50 flex items-stretch justify-between"
+        "w-[768px] h-[448px] rounded-xl bg-zinc-50 dark:bg-slate-800 flex items-stretch justify-between"
       }
     >
       <div className={"flex-1 flex justify-center items-center w-full"}>

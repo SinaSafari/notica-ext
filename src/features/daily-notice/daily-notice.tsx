@@ -27,7 +27,7 @@ export function DailyNotice() {
             }
           >
             <p className={"text-sm"}>{data.result.events[0]?.description}</p>
-            <p className={"text-xs"}>{data.result.events[1]?.description}</p>
+            {/* <p className={"text-xs"}>{data.result.events[1]?.description}</p> */}
           </div>
         </>
       ) : (

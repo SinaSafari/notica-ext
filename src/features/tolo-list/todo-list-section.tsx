@@ -124,7 +124,7 @@ export function TodoListSection() {
             return (
               <GlassContainer
                 key={todo.id.toString()}
-                className={`flex justify-between items-stretch gap-4 rounded-xl hover:bg-white  ${todo.status === "done" ? "bg-white/5" : ""
+                className={`flex justify-between items-stretch gap-4 rounded-xl hover:bg-white dark:hover:bg-slate-900 ${todo.status === "done" ? "bg-white/5 dark:bg-slate-500/20" : ""
                   }`}
               >
                 <div className="h-full w-4 flex flex-col justify-around items-center gap-4">
@@ -163,7 +163,7 @@ export function TodoListSection() {
                 >
                   <div className="flex justify-between items-center">
                     <p
-                      className={`text-sm font-bold overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis ${todo.status === "done" ? "text-black/10" : ""
+                      className={`text-sm font-bold overflow-x-hidden max-w-[100px] whitespace-nowrap overflow-ellipsis ${todo.status === "done" ? "text-black-10 dark:text-slate-400/50" : ""
                         }`}
                     >
                       {todo.title}
@@ -173,8 +173,8 @@ export function TodoListSection() {
                       <IconCalendar size={16} color="gray" />
                       <p
                         className={`text-xs  ${todo.status === "done"
-                          ? "text-black/10"
-                          : "text-gray-500"
+                          ? "text-black/10 dark:text-slate-400/30"
+                          : "text-gray-500 dark:text-slate-400"
                           }`}
                       >
                         {todo.createdAt ? (
@@ -186,7 +186,7 @@ export function TodoListSection() {
                     </div>
                   </div>
                   <p
-                    className={`text-sm  overflow-x-hidden max-w-[200px] whitespace-nowrap overflow-ellipsis ${todo.status === "done" ? "text-black/10" : "text-gray-500"
+                    className={`text-sm  overflow-x-hidden max-w-[200px] whitespace-nowrap overflow-ellipsis ${todo.status === "done" ? "text-black/10 dark:text-slate-400/30" : "text-gray-500"
                       }`}
                   >
                     {todo.description}

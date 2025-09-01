@@ -47,7 +47,7 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
               <div className="flex items-center justify-between mb-3">
                 <button
                   onClick={() => setMonthOffset((prev) => prev - 1)}
-                  className="p-1 hover:bg-gray-100 rounded-full"
+                  className="p-1 hover:bg-gray-100 dark:hover:bg-slate-500 rounded-full"
                 >
                   <IconChevronRight size={20} />
                 </button>
@@ -56,18 +56,17 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
                 </p>
                 <button
                   onClick={() => setMonthOffset((prev) => prev + 1)}
-                  className="p-1 hover:bg-gray-100 rounded-full"
+                  className="p-1 hover:bg-gray-100 rounded-full dark:hover:bg-slate-500"
                 >
                   <IconChevronLeft size={20} />
                 </button>
               </div>
-
               <div className="flex flex-col gap-2">
                 {/* Day Headers */}
                 <div className="grid grid-cols-7 gap-1 mb-2">
                   {persianDays.map((day, index) => (
                     <div key={index} className="text-center">
-                      <span className="text-base font-semibold text-gray-800">
+                      <span className="text-base font-semibold text-gray-800 dark:text-gray-200">
                         {day}
                       </span>
                     </div>
@@ -98,15 +97,15 @@ export function GoogleCalendarSection(props: GoogleCalendarSectionProps) {
                           {dayData.day && (
                             <span
                               className={`text-base ${dayData.isPast && dayData.isCurrentMonth
-                                ? "text-gray-500"
+                                ? "text-gray-500 dark:text-gray-300"
                                 : dayData.isCurrentMonth
                                   // ? dayData.isWeekend
                                   ? dayIndex === 6 && dayData.isCurrentMonth
-                                    ? "text-red-700 border-1 w-8 h-8 flex items-center justify-center rounded-4xl"
+                                    ? "text-red-700 border-1 w-8 h-8 flex dark:text-red-400 items-center justify-center rounded-4xl"
                                     : selectedDate?.day &&
                                       selectedDate?.fullDate === dayData.fullDate
                                       ? "text-white"
-                                      : "text-gray-800"
+                                      : "text-gray-800 dark:text-gray-200"
                                   : "text-gray-400"
                                 }`}
                             >

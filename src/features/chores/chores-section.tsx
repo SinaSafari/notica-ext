@@ -3,6 +3,7 @@ import { useAppState, type Chore } from "@/store";
 import { IconPlus } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useShallow } from "zustand/shallow";
+import { IconBattery2 } from '@tabler/icons-react';
 
 // import { BrakeSvg } from "./icons/brake-svg";
 // import { BreakfastSvg } from "./icons/breakfast-svg";
@@ -98,15 +99,15 @@ export function ChoresSection({
               return (
                 <div className="relative flex justify-center items-center">
                   <div className="absolute">
-                    <div className="flex w-[56px] h-[56px]  justify-center items-center relative">
-                      <div className="w-[110%] h-[110%] shadow-sm shadow-pink-500 bg-transparent rounded-4xl absolute "></div>
+                    <div className="flex w-[56px] h-[56px] rounded-4xl justify-center items-center relative">
+                      {/* <div className="w-[110%] h-[110%] shadow-sm shadow-pink-500 bg-transparent rounded-4xl absolute "></div>
                       <div className="w-[108%] h-[108%] shadow-sm shadow-violet-500 bg-transparent rounded-4xl absolute rotate-90"></div>
-                      <div className="w-[106%] h-[106%] shadow-sm shadow-cyan-500 bg-transparent rounded-4xl absolute rotate-180"></div>
+                      <div className="w-[106%] h-[106%] shadow-sm shadow-cyan-500 bg-transparent rounded-4xl absolute rotate-180"></div> */}
                     </div>
                   </div>
 
                   <GlassContainer
-                    className={`w-[56px] h-[56px] rounded-4xl flex items-center justify-center`}
+                    className={`w-[56px] h-[56px] rounded-4xl bg-blue-600 dark:bg-blue-700 flex items-center justify-center`}
                     onClick={() => setIsChoreModalOpen(true)}
                   >
                     <img src={c.icon} className="w-6 h-6" />
@@ -128,7 +129,7 @@ export function ChoresSection({
             } else {
               return (
                 <GlassContainer
-                  className={`w-[56px] h-[56px] rounded-4xl flex items-center justify-center hover:bg-white ${activeChores.includes(c.icon)
+                  className={`group w-[56px] h-[56px] rounded-4xl flex items-center justify-center hover:bg-white dark:hover:bg-slate-900 ${activeChores.includes(c.icon)
                     ? "ring-4 ring-blue-600"
                     : "ring-4 ring-transparent"
                     }`}
@@ -142,7 +143,7 @@ export function ChoresSection({
 
           return (
             <GlassContainer
-              className={`w-[56px] h-[56px] rounded-4xl flex items-center justify-center ring-4 ring-transparent hover:bg-white`}
+              className={`w-[56px] h-[56px] rounded-4xl flex items-center justify-center ring-4 ring-transparent hover:bg-white dark:hover:bg-slate-900`}
               onClick={() => setIsChoreModalOpen(true)}
             >
               <IconPlus className="w-6 h-6" />

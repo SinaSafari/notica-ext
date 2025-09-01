@@ -14,7 +14,7 @@ export function GlassContainer({
   return (
     <div
       className={twMerge(
-        "rounded-4xl bg-white/50   border-slate-300 backdrop-blur-xs p-4",
+        "rounded-4xl bg-white/50 dark:bg-slate-800/80 dark:text-white border-slate-300 backdrop-blur-xs p-4",
         className
       )}
       onClick={() => {

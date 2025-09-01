@@ -86,7 +86,7 @@ export function ClockAndWeatherSection() {
     enabled: !!selectedCity,
   });
 
-  console.log("weather", data);
+  // console.log("weather", data);
 
   useEffect(() => {
     // Set up the interval
@@ -112,8 +112,8 @@ export function ClockAndWeatherSection() {
             </div>
           ) : data ? (
             <>
-              <div className={"flex justify-around items-center w-full"}>
-                <p className={"font-black text-5xl text-blue-600"}>
+              <div className={"flex justify-around items-center gird w-full"}>
+                <p className={"font-black text-4xl text-blue-600 dark:text-blue-400"}>
                   {data.current}&deg;
                 </p>
                 <img
@@ -143,7 +143,7 @@ export function ClockAndWeatherSection() {
           className={"flex flex-col justify-around items-stretch gap-2 flex-1"}
         >
           <div className={"flex justify-center items-center w-full"}>
-            <p className={"text-blue-600 text-5xl font-black"}>
+            <p className={"text-blue-600 text-4xl font-black dark:text-blue-400"}>
               {`${time.getHours().toString().padStart(2, "0")}:${time
                 .getMinutes()
                 .toString()
