@@ -30,12 +30,12 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
     <>
       <div
         className={
-          "w-[768px] h-[367px] rounded-2xl bg-slate-100 flex items-stretch justify-between p-4 gap-4"
+          "w-[768px] h-[367px] rounded-2xl bg-slate-100 dark:bg-slate-900 flex items-stretch justify-between p-4 gap-4"
         }
       >
         <div
           className={
-            "rounded-xl bg-[#F8FAFC]  flex-1 ring-1 ring-slate-200 text-right flex flex-col justify-between items-stretch gap-4 h-full p-2"
+            "rounded-xl bg-[#F8FAFC] dark:bg-slate-800/50 dark:text-white dark:ring-slate-600  flex-1 ring-1  ring-slate-200 text-right flex flex-col justify-between items-stretch gap-4 h-full p-2"
           }
         >
           <div className={"flex-1 items-stretch gap-4 p-4"}>
@@ -47,7 +47,7 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
                 type={"text"}
                 name={"title"}
                 className={
-                  "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"عنوان تسک شما"}
                 value={taskTitle}
@@ -62,7 +62,7 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
                 type={"text"}
                 name={"description"}
                 className={
-                  "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"توضیحات تسک شما"}
                 value={taskDescription}
@@ -72,27 +72,24 @@ export function UpdateTodoModal(props: CreateTodoModalProps) {
 
             <div className="flex items-stretch flex-row-reverse gap-2 my-4">
               <div
-                className={`rounded-full bg-red-500 h-4 w-4 border ${
-                  selectedTag === "urgent"
-                    ? "border-blue-500"
-                    : "border-red-500"
-                }`}
+                className={`rounded-full bg-red-500 h-4 w-4 border ${selectedTag === "urgent"
+                  ? "border-blue-500"
+                  : "border-red-500"
+                  }`}
                 onClick={() => setSelectedTag("urgent")}
               ></div>
               <div
-                className={`rounded-full bg-yellow-500 h-4 w-4 border ${
-                  selectedTag === "moderate"
-                    ? "border-blue-500"
-                    : "border-yellow-500"
-                }`}
+                className={`rounded-full bg-yellow-500 h-4 w-4 border ${selectedTag === "moderate"
+                  ? "border-blue-500"
+                  : "border-yellow-500"
+                  }`}
                 onClick={() => setSelectedTag("moderate")}
               ></div>
               <div
-                className={`rounded-full bg-green-500 h-4 w-4 border ${
-                  selectedTag === "not-force"
-                    ? "border-blue-500"
-                    : "border-green-500"
-                }`}
+                className={`rounded-full bg-green-500 h-4 w-4 border ${selectedTag === "not-force"
+                  ? "border-blue-500"
+                  : "border-green-500"
+                  }`}
                 onClick={() => setSelectedTag("not-force")}
               ></div>
             </div>

@@ -113,7 +113,7 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
                     <div className="flex-1">
                       <label>ساعت</label>
                       <select
-                        className="w-full rounded-xl border border-slate-300 p-2"
+                        className="w-full rounded-xl border border-slate-300 dark:bg-slate-700 dark:border-slate-600 p-2"
                         value={ch.hour || "00"}
                         onChange={(e) =>
                           addChore({ ...ch, hour: e.target.value })
@@ -133,7 +133,7 @@ export function ChoreSettingModal({ onClose }: ChoreSettingModalProps) {
                     <div className="flex-1">
                       <label>دقیقه</label>
                       <select
-                        className="w-full rounded-xl border border-slate-300 p-2"
+                        className="w-full rounded-xl border border-slate-300 dark:bg-slate-700 dark:border-slate-600 p-2"
                         value={ch.minute || "00"}
                         onChange={(e) =>
                           addChore({ ...ch, minute: e.target.value })

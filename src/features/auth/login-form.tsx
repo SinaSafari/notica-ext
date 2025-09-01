@@ -46,7 +46,7 @@ export function LoginForm(props: LoginFormProps) {
                 type={"email"}
                 name={"email"}
                 className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "rounded-lg border-slate-300 outline-0 dark:bg-slate-700 dark:border-slate-600 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"ایمیل"}
                 // value={email}
@@ -72,7 +72,7 @@ export function LoginForm(props: LoginFormProps) {
                 type={"password"}
                 name={"password"}
                 className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "rounded-lg border-slate-300 outline-0 dark:bg-slate-700 dark:border-slate-600 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"رمز عبور شما"}
                 // value={password}
@@ -93,7 +93,7 @@ export function LoginForm(props: LoginFormProps) {
       </p>
       <button
         className={
-          "rounded-xl py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+          "rounded-xl py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white  disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
         }
         onClick={() => {
           //   props.onClose();

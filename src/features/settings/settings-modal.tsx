@@ -2,7 +2,7 @@
 
 import {
   IconMenu,
-  IconMenu2,
+  // IconMenu2,
   IconMenu3,
   IconNotification,
   IconUser,
@@ -45,19 +45,19 @@ export function SettingsModal(props: SettingsModalProps) {
     <>
       <div
         className={
-          "w-[768px] h-[440px] rounded-xl bg-slate-100 flex items-stretch justify-between p-4 gap-4"
+          "w-[768px] h-[440px] rounded-xl bg-slate-100 dark:bg-slate-900  flex items-stretch justify-between p-4 gap-4"
         }
       >
         <div
           className={
-            "rounded-2xl bg-[#F8FAFC] max-w-[220px] flex-1 flex flex-col items-stretch justify-between ring-1 ring-slate-200"
+            "rounded-2xl bg-[#F8FAFC] dark:bg-slate-800/50 dark:text-white dark:ring-slate-600 max-w-[220px] flex-1 flex flex-col items-stretch justify-between ring-1 ring-slate-200"
           }
         >
-          <div className={"flex-1 flex flex-col items-stretch gap-2 p-4"}>
+          <div className={"flex-1 flex flex-col items-stretch gap-2 p-2"}>
             <div
               className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "account"
-                  ? "text-white bg-blue-600 rounded-lg p-1"
-                  : ""
+                ? "text-white bg-blue-600 rounded-lg p-1"
+                : ""
                 }`}
               onClick={() => setActiveTab("account")}
             >
@@ -68,8 +68,8 @@ export function SettingsModal(props: SettingsModalProps) {
             </div>
             <div
               className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "background"
-                  ? "text-white bg-blue-600 rounded-lg p-1"
-                  : ""
+                ? "text-white bg-blue-600 rounded-lg p-1"
+                : ""
                 }`}
               onClick={() => setActiveTab("background")}
             >
@@ -80,8 +80,8 @@ export function SettingsModal(props: SettingsModalProps) {
             </div>
             <div
               className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "general_settings"
-                  ? "text-white bg-blue-600 rounded-lg p-1"
-                  : ""
+                ? "text-white bg-blue-600 rounded-lg p-1"
+                : ""
                 }`}
               onClick={() => setActiveTab("general_settings")}
             >
@@ -92,8 +92,8 @@ export function SettingsModal(props: SettingsModalProps) {
             </div>
             <div
               className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer ${activeTab === "privacy"
-                  ? "text-white bg-blue-600 rounded-lg "
-                  : ""
+                ? "text-white bg-blue-600 rounded-lg "
+                : ""
                 }`}
               onClick={() => setActiveTab("privacy")}
             >
@@ -108,7 +108,7 @@ export function SettingsModal(props: SettingsModalProps) {
               "flex-1 max-h-[70px] flex flex-col items-stretch justify-around px-4 "
             }
           >
-            <div
+            {/* <div
               className={`flex items-center justify-between gap-2 text-sm p-1 cursor-pointer`}
               onClick={() => props.onClose()}
             >
@@ -116,13 +116,13 @@ export function SettingsModal(props: SettingsModalProps) {
                 <IconMenu2 className={"w-[16px] h-16px"} />
               </div>
               <p className={"flex-1 text-right"}>خروج از حساب کاربری</p>
-            </div>
-            <div className={" w-full h-[1px] bg-slate-300"}></div>
-            <p className={"text-center text-xs text-gray-600"}>Version 0.0.1</p>
+            </div> */}
+            <div className={" w-full h-[1px] bg-slate-300 "}></div>
+            <p className={"text-center text-xs text-gray-600 dark:text-gray-500"}>Version 0.0.1</p>
           </div>
         </div>
         <div
-          className={"rounded-2xl bg-[#F8FAFC]  flex-1 ring-1 ring-slate-200"}
+          className={"rounded-2xl bg-[#F8FAFC] dark:bg-slate-800/50 dark:text-white dark:ring-slate-600  flex-1 ring-1 ring-slate-200 p-2"}
         >
           {activeTab === "account" ? (
             <div
@@ -148,7 +148,7 @@ export function SettingsModal(props: SettingsModalProps) {
                       type={"password"}
                       name={"password"}
                       className={
-                        "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                        "text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                       }
                       placeholder={"نام شما"}
                     />
@@ -164,7 +164,7 @@ export function SettingsModal(props: SettingsModalProps) {
                       type={"password"}
                       name={"password"}
                       className={
-                        "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                        "text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                       }
                       placeholder={"نام خانوادگی شما"}
                     />
@@ -177,7 +177,7 @@ export function SettingsModal(props: SettingsModalProps) {
                   type={"password"}
                   name={"password"}
                   className={
-                    "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                    "text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                   }
                   placeholder={"شماره موبایل شما"}
                 />
@@ -188,7 +188,7 @@ export function SettingsModal(props: SettingsModalProps) {
                 <div className={"flex justify-between items-center gap-2"}>
                   <div className={"w-full flex-1"}>
                     <label className="text-sm">روز</label>
-                    <select className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1">
+                    <select className="text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1">
                       {Array.from({ length: 31 - 1 + 1 }, (_, i) => 1 + i).map(
                         (i) => {
                           return <option>{i}</option>;
@@ -198,7 +198,7 @@ export function SettingsModal(props: SettingsModalProps) {
                   </div>
                   <div className={"w-full flex-1"}>
                     <label className="text-sm">ماه</label>
-                    <select className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1">
+                    <select className="text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1">
                       {[
                         "فروردین",
                         "اردیبهشت",
@@ -225,7 +225,7 @@ export function SettingsModal(props: SettingsModalProps) {
                   </div>
                   <div className={"w-full flex-1"}>
                     <label className="text-sm">سال</label>
-                    <select className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1">
+                    <select className="text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1">
                       {Array.from(
                         { length: 1404 - 1300 + 1 },
                         (_, i) => 1300 + i
@@ -377,7 +377,7 @@ export function SettingsModal(props: SettingsModalProps) {
                   /> */}
                   <select
                     defaultValue={"fa"}
-                    className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                    className="text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                   >
                     <option value={"fa"}>فارسی</option>
                   </select>
@@ -393,7 +393,7 @@ export function SettingsModal(props: SettingsModalProps) {
                     placeholder={"تهران"}
                   /> */}
                   <select
-                    className="text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                    className="text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                     value={selectedCity.name}
                     onChange={async (e) => {
                       const found = weatherCities.find(

@@ -43,7 +43,7 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
                 type={"text"}
                 name={"title"}
                 className={
-                  "text-sm rounded border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "text-sm rounded border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"عنوان تسک شما"}
                 value={taskTitle}
@@ -58,7 +58,7 @@ export function CreateTodoModal(props: CreateTodoModalProps) {
                 type={"text"}
                 name={"description"}
                 className={
-                  "text-sm rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "text-sm rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"توضیحات تسک شما"}
                 value={taskDescription}

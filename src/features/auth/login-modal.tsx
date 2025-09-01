@@ -58,7 +58,7 @@ export function LoginModal(props: LoginModal) {
   return (
     <div
       className={
-        "w-[768px] h-[448px] rounded-xl bg-zinc-50 dark:bg-slate-800 flex items-stretch justify-between"
+        "w-[768px] h-[448px] rounded-xl bg-zinc-50 dark:bg-slate-800 dark:text-white flex items-stretch justify-between"
       }
     >
       <div className={"flex-1 flex justify-center items-center w-full"}>
@@ -92,7 +92,7 @@ export function LoginModal(props: LoginModal) {
                 type={"email"}
                 name={"email"}
                 className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"ایمیل"}
               />
@@ -130,7 +130,7 @@ export function LoginModal(props: LoginModal) {
                 type={"text"}
                 name={"code"}
                 className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"کد تایید"}
               />
@@ -167,7 +167,7 @@ export function LoginModal(props: LoginModal) {
                 type={"text"}
                 name={"firstname"}
                 className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"نام شما"}
               />
@@ -178,7 +178,7 @@ export function LoginModal(props: LoginModal) {
                 type={"text"}
                 name={"lastname"}
                 className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"نام خانوادگی شما"}
               />
@@ -189,7 +189,7 @@ export function LoginModal(props: LoginModal) {
                 type={"text"}
                 name={"phone"}
                 className={
-                  "rounded-lg border-slate-300 outline-0 border-[1px] w-full px-3 py-1"
+                  "rounded-lg border-slate-300 dark:bg-slate-700 dark:border-slate-600 outline-0 border-[1px] w-full px-3 py-1"
                 }
                 placeholder={"شماره همراه شما"}
               />
