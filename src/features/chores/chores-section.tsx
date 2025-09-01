@@ -3,7 +3,6 @@ import { useAppState, type Chore } from "@/store";
 import { IconPlus } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useShallow } from "zustand/shallow";
-import { IconBattery2 } from '@tabler/icons-react';
 
 // import { BrakeSvg } from "./icons/brake-svg";
 // import { BreakfastSvg } from "./icons/breakfast-svg";

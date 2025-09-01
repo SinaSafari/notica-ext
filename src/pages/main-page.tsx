@@ -152,10 +152,10 @@ export function MainPage() {
               >
                 <IconSettings />
               </div>
-              <div>
+              <div className="bg-gray-200 dark:bg-gray-800 text-black dark:text-white w-12 h-12 backdrop-blur-sm rounded-full grid place-items-center " >
                 <DarkModeToggle />
               </div>
-              <div className="w-12 h-12 bg-white/50 backdrop-blur-sm rounded-full grid place-items-center hover:bg-red-700 hover:text-white dark:bg-slate-800 dark:text-white">
+              <div className="w-12 h-12  bg-white/50 backdrop-blur-sm rounded-full grid place-items-center hover:bg-red-700 hover:text-white dark:bg-slate-800 dark:text-white">
                 <IconLogout />
               </div>
             </div>
